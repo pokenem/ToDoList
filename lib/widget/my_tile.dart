@@ -10,7 +10,12 @@ class CustomTile extends StatefulWidget {
   final bool isVis;
   final Function() updateParent;
 
-  const CustomTile({super.key, required this.index, required this.isVis, required this.updateParent});
+  const CustomTile({
+    super.key,
+    required this.index,
+    required this.isVis,
+    required this.updateParent,
+  });
 
   @override
   _CustomTileState createState() => _CustomTileState();
@@ -29,170 +34,172 @@ class _CustomTileState extends State<CustomTile> {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: Key(tasks[index].id.toString()),
-      direction: DismissDirection.horizontal,
-      confirmDismiss: (DismissDirection direction) async {
-        if (direction == DismissDirection.endToStart) {
-          return true;
-        } else {
-          logger.i('Tile swiped right and element with index $index changed his state');
-          Future.delayed(const Duration(milliseconds: 250), () {
-            tasks[index].isDone = !tasks[index].isDone!;
-            widget.updateParent();
-          });
-          return false;
-        }
-      },
-      onDismissed: (DismissDirection direction) {
-        logger.i('Tile swiped left and element with index $index deleted from list');
-        tasks.removeAt(index);
-        widget.updateParent();
-      },
-      onUpdate: (DismissUpdateDetails details) {
-        setState(() {
-          shift = details.progress;
-        });
-      },
-      background: Container(
-        decoration: BoxDecoration(
-          color: tasks[index].isDone! ? AppColor.clRed : AppColor.clGreen,
-          borderRadius: index == whatTheFirst()
-              ? const BorderRadius.vertical(
-                  top: Radius.circular(8),
-                )
-              : null,
-        ),
-        alignment: Alignment.centerLeft,
-        padding: EdgeInsets.only(
-            left: shift * (MediaQuery.of(context).size.width - 16) - 40 >= 28 ? shift * (MediaQuery.of(context).size.width - 16) - 48 : 20),
-        child: tasks[index].isDone! ? const Icon(Icons.close, color: AppColor.clWhite) : const Icon(Icons.check, color: AppColor.clWhite),
-      ),
-      secondaryBackground: Container(
-        decoration: BoxDecoration(
-          color: AppColor.clRed,
-          borderRadius: index == whatTheFirst()
-              ? const BorderRadius.vertical(
-                  top: Radius.circular(8),
-                )
-              : null,
-        ),
-        alignment: Alignment.centerRight,
-        padding: EdgeInsets.only(
-            right: shift * (MediaQuery.of(context).size.width - 16) - 40 >= 28 ? shift * (MediaQuery.of(context).size.width - 16) - 48 : 20),
-        child: const Icon(
-          Icons.delete,
-          color: Colors.white,
-        ),
-      ),
-      child: ListTile(
-        onTap: () {
-          currentIndex = index;
-          logger.i('Pressed on tile in MyHomePage');
-          NavigationManager.instance.openAdd(currentIndex).then((_) {
-            widget.updateParent();
+    return ClipRRect(
+      child: Dismissible(
+        key: Key(tasks[index].id.toString()),
+        direction: DismissDirection.horizontal,
+        confirmDismiss: (DismissDirection direction) async {
+          if (direction == DismissDirection.endToStart) {
+            return true;
+          } else {
+            logger.i('Tile swiped right and element with index $index changed his state');
+            Future.delayed(const Duration(milliseconds: 250), () {
+              tasks[index].isDone = !tasks[index].isDone!;
+              widget.updateParent();
+            });
+            return false;
+          }
+        },
+        onDismissed: (DismissDirection direction) {
+          logger.i('Tile swiped left and element with index $index deleted from list');
+          tasks.removeAt(index);
+          widget.updateParent();
+        },
+        onUpdate: (DismissUpdateDetails details) {
+          setState(() {
+            shift = details.progress;
           });
         },
-        shape: index == whatTheFirst()
-            ? const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(8),
+        background: Container(
+          decoration: BoxDecoration(
+            color: tasks[index].isDone! ? AppColor.clRed : AppColor.clGreen,
+            borderRadius: index == whatTheFirst()
+                ? const BorderRadius.vertical(
+                    top: Radius.circular(8),
+                  )
+                : null,
+          ),
+          alignment: Alignment.centerLeft,
+          padding: EdgeInsets.only(
+              left: shift * (MediaQuery.of(context).size.width - 16) - 40 >= 28 ? shift * (MediaQuery.of(context).size.width - 16) - 48 : 20),
+          child: tasks[index].isDone! ? const Icon(Icons.close, color: AppColor.clWhite) : const Icon(Icons.check, color: AppColor.clWhite),
+        ),
+        secondaryBackground: Container(
+          decoration: BoxDecoration(
+            color: AppColor.clRed,
+            borderRadius: index == whatTheFirst()
+                ? const BorderRadius.vertical(
+                    top: Radius.circular(8),
+                  )
+                : null,
+          ),
+          alignment: Alignment.centerRight,
+          padding: EdgeInsets.only(
+              right: shift * (MediaQuery.of(context).size.width - 16) - 40 >= 28 ? shift * (MediaQuery.of(context).size.width - 16) - 48 : 20),
+          child: const Icon(
+            Icons.delete,
+            color: Colors.white,
+          ),
+        ),
+        child: ListTile(
+          onTap: () {
+            currentIndex = index;
+            logger.i('Pressed on tile in MyHomePage');
+            NavigationManager.instance.openAdd(currentIndex).then((_) {
+              widget.updateParent();
+            });
+          },
+          shape: index == whatTheFirst()
+              ? const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(8),
+                  ),
+                )
+              : null,
+          tileColor: Theme.of(context).colorScheme.onPrimary,
+          title: Stack(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    right: 3,
+                    top: 14,
+                  ),
+                  child: Icon(
+                    Icons.info_outline,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
+                  ),
                 ),
-              )
-            : null,
-        tileColor: Theme.of(context).colorScheme.onPrimary,
-        title: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
+              ),
+              Padding(
                 padding: const EdgeInsets.only(
-                  right: 3,
-                  top: 14,
+                  left: 2,
+                  top: 16,
                 ),
-                child: Icon(
-                  Icons.info_outline,
-                  color: Theme.of(context).colorScheme.secondaryContainer,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 2,
-                top: 16,
-              ),
-              child: SizedBox(
-                width: 18,
-                height: 18,
-                child: Checkbox(
-                  value: tasks[index].isDone!,
-                  checkColor: AppColor.clWhite,
-                  fillColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.selected)) {
-                        return AppColor.clGreen;
-                      } else {
-                        return tasks[index].rlvc == 2 ? AppColor.clRed : Theme.of(context).colorScheme.tertiary;
-                      }
+                child: SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: Checkbox(
+                    value: tasks[index].isDone!,
+                    checkColor: AppColor.clWhite,
+                    fillColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.selected)) {
+                          return AppColor.clGreen;
+                        } else {
+                          return tasks[index].rlvc == 2 ? AppColor.clRed : Theme.of(context).colorScheme.tertiary;
+                        }
+                      },
+                    ),
+                    onChanged: (bool? value) {
+                      logger.i('Pressed checkbox and element with index $index changed his state');
+                      tasks[index].isDone = value;
+                      widget.updateParent();
                     },
                   ),
-                  onChanged: (bool? value) {
-                    logger.i('Pressed checkbox and element with index $index changed his state');
-                    tasks[index].isDone = value;
-                    widget.updateParent();
-                  },
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 36,
-                top: 14,
-                bottom: 14,
-                right: 52,
-              ),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text.rich(
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      TextSpan(
-                        children: <InlineSpan>[
-                          if (tasks[index].rlvc == 2 && !tasks[index].isDone!)
-                            TextSpan(
-                              text: '!! ',
-                              style: Theme.of(context).textTheme.headlineLarge,
-                            ),
-                          if (tasks[index].rlvc == 1 && !tasks[index].isDone!)
-                            const WidgetSpan(
-                              child: Icon(
-                                Icons.arrow_downward,
-                                color: AppColor.clGrey,
-                                size: 18,
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 36,
+                  top: 14,
+                  bottom: 14,
+                  right: 52,
+                ),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text.rich(
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        TextSpan(
+                          children: <InlineSpan>[
+                            if (tasks[index].rlvc == 2 && !tasks[index].isDone!)
+                              TextSpan(
+                                text: '!! ',
+                                style: Theme.of(context).textTheme.headlineLarge,
                               ),
-                            ),
-                          TextSpan(
-                            text: tasks[index].note!,
-                            style: tasks[index].isDone! ? Theme.of(context).textTheme.bodySmall : Theme.of(context).textTheme.bodyMedium,
-                          )
-                        ],
+                            if (tasks[index].rlvc == 1 && !tasks[index].isDone!)
+                              const WidgetSpan(
+                                child: Icon(
+                                  Icons.arrow_downward,
+                                  color: AppColor.clGrey,
+                                  size: 18,
+                                ),
+                              ),
+                            TextSpan(
+                              text: tasks[index].note!,
+                              style: tasks[index].isDone! ? Theme.of(context).textTheme.bodySmall : Theme.of(context).textTheme.bodyMedium,
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    if (tasks[index].date != null)
-                      Text(
-                        '${tasks[index].date?.year}/${tasks[index].date?.month}/${tasks[index].date?.day}',
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                  ],
+                      if (tasks[index].date != null)
+                        Text(
+                          '${tasks[index].date?.year}/${tasks[index].date?.month}/${tasks[index].date?.day}',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
+          style: ListTileStyle.list,
         ),
-        style: ListTileStyle.list,
       ),
     );
   }

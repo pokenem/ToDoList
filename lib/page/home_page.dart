@@ -17,14 +17,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int kol = 0;
   bool isVis = false;
   double shift = 0;
-  TileData? crntTile = tasks[0];
   int crntIndex = 0;
   double pixels = 0;
-
-  final scrollController = ScrollController();
 
   updateIsVis(bool newValue) {
     setState(() {
@@ -51,9 +47,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: CustomScrollView(
-        controller: scrollController,
         slivers: [
-          MySliverAppBar(isVis: isVis, updateParent: (bool newValue) => updateIsVis(newValue)),
+          MySliverAppBar( isVis: isVis, updateParent: (bool newValue) => updateIsVis(newValue)),
           SliverPadding(
             padding: const EdgeInsets.only(
               left: 8,
@@ -65,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   if (!isVis) {
-                    if (index != tasks.length - kol) {
+                    if (index != tasks.length) {
                       if (tasks[index].isDone!) {
                         return Container();
                       } else {
@@ -92,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     return newTile(index);
                   }
                 },
-                childCount: isVis ? tasks.length + 1 : tasks.length - kol + 1,
+                childCount: tasks.length + 1, //isVis ? tasks.length + 1 : tasks.length - kol + 1,
               ),
             ),
           ),

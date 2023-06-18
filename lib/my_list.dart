@@ -1,3 +1,5 @@
+import 'package:tdlist/tile_data.dart';
+
 int nextID = 14;
 
 List<TileData> tasks = [
@@ -19,59 +21,59 @@ List<TileData> tasks = [
     rlvc: 1,
     date: DateTime(2022, 6, 11),
     isDone: false,
-    id: 1,
+    id: 2,
   ),
   TileData(
     note: 'Купить баскетбольный мяч',
     rlvc: 0,
     isDone: true,
-    id: 2,
+    id: 3,
   ),
   TileData(
     note: 'Съесть пиццу',
     rlvc: 2,
     isDone: false,
-    id: 3,
+    id: 4,
   ),
   TileData(
     note: 'Прыгнуть 2 раза',
     rlvc: 0,
     date: DateTime(2022, 6, 11),
     isDone: false,
-    id: 4,
+    id: 5,
   ),
   TileData(
     note: 'Папить кул-кола',
     rlvc: 0,
     isDone: true,
-    id: 5,
+    id: 6,
   ),
   TileData(
     note: 'Сходить покушать в макдональдс',
     rlvc: 0,
     isDone: false,
-    id: 6,
+    id: 7,
   ),
   TileData(
     note: 'Отобрать семки у голубей',
     rlvc: 0,
     date: DateTime(2022, 6, 11),
     isDone: true,
-    id: 7,
+    id: 8,
   ),
   TileData(
     note: 'Дружить с Дорой',
     rlvc: 0,
     date: DateTime(2022, 6, 11),
     isDone: false,
-    id: 8,
+    id: 9,
   ),
   TileData(
     note: 'Послушать маму',
     rlvc: 0,
     date: DateTime(2022, 6, 11),
     isDone: false,
-    id: 9,
+    id: 10,
   ),
   TileData(
     note: 'Мимо жизнь проходит, всю радость утая\n'
@@ -99,42 +101,26 @@ List<TileData> tasks = [
     rlvc: 0,
     date: DateTime(2022, 6, 11),
     isDone: false,
-    id: 10,
+    id: 11,
   ),
   TileData(
     note: 'Купить палочки Кузя',
     rlvc: 0,
     isDone: false,
-    id: 11,
+    id: 12,
   ),
   TileData(
     note: 'Отобрать ашкуди у собаки',
     rlvc: 0,
     date: DateTime(2022, 6, 11),
     isDone: false,
-    id: 12,
+    id: 13,
   ),
   TileData(
     note: 'Сломать теннисную ракетку',
     rlvc: 0,
     date: DateTime(2022, 6, 11),
     isDone: false,
-    id: 13,
+    id: 14,
   ),
 ];
-
-class TileData {
-  String? note;
-  int? rlvc;
-  DateTime? date;
-  bool? isDone;
-  int? id;
-
-  TileData({
-    this.note,
-    this.rlvc,
-    this.date,
-    this.isDone,
-    this.id,
-  });
-}

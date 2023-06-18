@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_color.dart';
+import '../tile_data.dart';
 import 'home_page.dart';
 import '../my_list.dart';
 import '../navigate/navigation.dart';
@@ -25,6 +26,12 @@ class _AddPageState extends State<AddPage> {
   String? note;
   bool? delEnable;
   int? index;
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
