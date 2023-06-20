@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tdlist/main.dart';
 
+import '../network_methods.dart';
 import '../theme/app_color.dart';
 import '../page/home_page.dart';
 import '../my_list.dart';
 import '../navigate/navigation.dart';
+import '../tile_data.dart';
 
 class CustomTile extends StatefulWidget {
   final int index;
@@ -32,6 +35,7 @@ class _CustomTileState extends State<CustomTile> {
     index = widget.index;
   }
 
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -45,6 +49,7 @@ class _CustomTileState extends State<CustomTile> {
             logger.i('Tile swiped right and element with index $index changed his state');
             Future.delayed(const Duration(milliseconds: 250), () {
               tasks[index].isDone = !tasks[index].isDone!;
+              changeTileNetwork(tasks[index!]);
               widget.updateParent();
             });
             return false;
@@ -52,6 +57,7 @@ class _CustomTileState extends State<CustomTile> {
         },
         onDismissed: (DismissDirection direction) {
           logger.i('Tile swiped left and element with index $index deleted from list');
+          delTileNetwork(tasks[index!].id);
           tasks.removeAt(index);
           widget.updateParent();
         },
@@ -138,13 +144,14 @@ class _CustomTileState extends State<CustomTile> {
                         if (states.contains(MaterialState.selected)) {
                           return AppColor.clGreen;
                         } else {
-                          return tasks[index].rlvc == 2 ? AppColor.clRed : Theme.of(context).colorScheme.tertiary;
+                          return tasks[index].relevance == 2 ? AppColor.clRed : Theme.of(context).colorScheme.tertiary;
                         }
                       },
                     ),
                     onChanged: (bool? value) {
                       logger.i('Pressed checkbox and element with index $index changed his state');
                       tasks[index].isDone = value;
+                      changeTileNetwork(tasks[index!]);
                       widget.updateParent();
                     },
                   ),
@@ -167,12 +174,12 @@ class _CustomTileState extends State<CustomTile> {
                         overflow: TextOverflow.ellipsis,
                         TextSpan(
                           children: <InlineSpan>[
-                            if (tasks[index].rlvc == 2 && !tasks[index].isDone!)
+                            if (tasks[index].relevance == 2 && !tasks[index].isDone!)
                               TextSpan(
                                 text: '!! ',
                                 style: Theme.of(context).textTheme.headlineLarge,
                               ),
-                            if (tasks[index].rlvc == 1 && !tasks[index].isDone!)
+                            if (tasks[index].relevance == 1 && !tasks[index].isDone!)
                               const WidgetSpan(
                                 child: Icon(
                                   Icons.arrow_downward,

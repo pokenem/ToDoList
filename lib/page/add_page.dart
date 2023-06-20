@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tdlist/main.dart';
+import 'package:tdlist/network_manager.dart';
+import 'package:tdlist/network_methods.dart';
 
 import '../theme/app_color.dart';
 import '../tile_data.dart';
@@ -18,7 +21,7 @@ class AddPage extends StatefulWidget {
 class _AddPageState extends State<AddPage> {
   bool? light = false;
   DateTime? date;
-  int? rlvc = 0;
+  int? editRelevance = 0;
   bool? isSave = false;
   TextEditingController? _controller = TextEditingController(
     text: '',
@@ -40,11 +43,10 @@ class _AddPageState extends State<AddPage> {
     note = _controller!.text;
     if (index == tasks.length) {
       delEnable = false;
-      date = DateTime.now();
     } else {
       delEnable = true;
       if (note != null) _controller = TextEditingController(text: note = tasks[index!].note);
-      rlvc = tasks[index!].rlvc;
+      editRelevance = tasks[index!].relevance;
       if (tasks[index!].date != null) {
         date = tasks[index!].date;
         light = true;
@@ -82,22 +84,29 @@ class _AddPageState extends State<AddPage> {
                     ? () {
                         logger.i('Pressed text button СОХРАНИТЬ in AddPage');
                         if (delEnable!) {
+                          tasks[index!].changedAt = DateTime.now();
                           tasks[index!].note = note;
 
-                          tasks[index!].rlvc = rlvc;
+                          tasks[index!].relevance = editRelevance;
                           if (light!) {
                             tasks[index!].date = date;
                           } else {
                             tasks[index!].date = null;
                           }
+                          changeTileNetwork(tasks[index!]);
                         } else {
                           tasks.add(TileData(
-                            id: nextID++,
-                            rlvc: rlvc,
-                            date: light! ? date : null,
-                            isDone: false,
                             note: note,
+                            relevance: editRelevance,
+                            date: date,
+                            isDone: false,
+                            id: nextID(),
+                            changedAt: DateTime.now(),
+                            createdAt: DateTime.now(),
+                            color: "#FFFFFF",
+                            lastUpdatedBy: "1",
                           ));
+                          addNewTileNetwork(tasks[index!]);
                         }
                         NavigationManager.instance.pop();
                       }
@@ -172,15 +181,15 @@ class _AddPageState extends State<AddPage> {
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         contentPadding: const EdgeInsets.all(0),
-                        subtitle: Container(
+                        subtitle: SizedBox(
                           height: 30,
                           child: DropdownButton<int>(
-                            value: rlvc,
+                            value: editRelevance,
                             iconSize: 0,
                             onChanged: (int? newValue) {
                               logger.i('User changed relevance in tile with index $index');
                               setState(() {
-                                rlvc = newValue!;
+                                editRelevance = newValue!;
                               });
                             },
                             items: [
@@ -233,13 +242,11 @@ class _AddPageState extends State<AddPage> {
                             'Сделать до',
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
-                          subtitle: Visibility(
-                            visible: light!,
-                            child: Text(
+                          subtitle: light! ? Text(
                               '${date!.year}/${date!.month}/${date!.day}',
                               style: Theme.of(context).textTheme.displaySmall,
-                            ),
-                          ),
+                            ) : const SizedBox.shrink(),
+
                           value: light!,
                           onChanged: (bool? value) async {
                             logger.i('Pressed switch in AddPage for tile with index $index');
@@ -248,7 +255,7 @@ class _AddPageState extends State<AddPage> {
                               DateTime? newDate = await showDatePicker(
                                 initialEntryMode: DatePickerEntryMode.calendarOnly,
                                 context: context,
-                                initialDate: date!,
+                                initialDate: date ?? DateTime.now(),
                                 firstDate: DateTime(1900),
                                 lastDate: DateTime(2100),
                                 builder: (BuildContext context, Widget? child) {
@@ -263,6 +270,10 @@ class _AddPageState extends State<AddPage> {
                                 date = newDate;
                               });
                             }
+                            else
+                              {
+                                date = null;
+                              }
                             setState(() {});
                           },
                         ),
@@ -286,6 +297,7 @@ class _AddPageState extends State<AddPage> {
                     onTap: delEnable!
                         ? () {
                             logger.i('Pressed tile Удалить in AddPage');
+                            delTileNetwork(tasks[index!].id);
                             tasks.removeAt(index!);
                             NavigationManager.instance.pop();
                           }

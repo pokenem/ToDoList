@@ -19,7 +19,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool isVis = false;
   double shift = 0;
-  int crntIndex = 0;
+  int currentIndex = 0;
   double pixels = 0;
 
   updateIsVis(bool newValue) {
@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   if (!isVis) {
                     if (index != tasks.length) {
                       if (tasks[index].isDone!) {
-                        return Container();
+                        return const SizedBox.shrink();
                       } else {
                         return CustomTile(
                           index: index,
@@ -121,8 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
       tileColor: Theme.of(context).colorScheme.onPrimary,
       onTap: () {
         logger.i('Pressed tile Новое in MyHomePage');
-        crntIndex = index;
-        NavigationManager.instance.openAdd(crntIndex).then((_) {
+        currentIndex = index;
+        NavigationManager.instance.openAdd(currentIndex).then((_) {
           setState(() {});
         });
       },

@@ -29,6 +29,9 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   logger: ^1.4.0
+  http: ^1.0.0
+  uuid: ^3.0.6
+  path_provider: ^2.0.15
   flutter:
     sdk: flutter
 
