@@ -4,10 +4,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:tdlist/network_methods.dart';
 import 'package:tdlist/page/home_page.dart';
-import 'package:tdlist/tile_data.dart';
 
-import 'main.dart';
-import 'my_list.dart';
 import 'network_manager.dart';
 
 var networkManager = NetworkManager();

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tdlist/main.dart';
-import 'package:tdlist/network_manager.dart';
 import 'package:tdlist/network_methods.dart';
 import 'package:tdlist/persistence_methods.dart';
 

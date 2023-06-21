@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 
 String nextID()
 {
-  return Uuid().v4();
+  return const Uuid().v4();
 }
 
 List<TileData> tasks = [];

@@ -4,7 +4,6 @@ import 'package:tdlist/persistence_manager.dart';
 import 'package:tdlist/tile_data.dart';
 
 import 'my_list.dart';
-import 'network_manager.dart';
 import 'theme/app_theme.dart';
 import 'navigate/navigation.dart';
 

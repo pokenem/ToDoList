@@ -23,12 +23,11 @@ class NetworkManager {
           data = jsonResponse['list'];
           _revision = jsonResponse['revision'];
       } else {
-        print(response.statusCode);
       }
     }
     catch(e)
     {
-      throw e;
+      rethrow;
     }
       return data;
 
@@ -49,7 +48,7 @@ class NetworkManager {
     }
     catch(e)
     {
-      throw e;
+      rethrow;
     }
   }
 
@@ -64,11 +63,10 @@ class NetworkManager {
 
       if (response.statusCode == 200) {
       } else {
-        print(response.statusCode);
       }
     }
     catch (e) {
-      throw e;
+      rethrow;
     }
   }
     Future<dynamic> deleteData(String id) async {
@@ -85,7 +83,7 @@ class NetworkManager {
       }
       catch(e)
       {
-        throw e;
+        rethrow;
       }
     }
 
@@ -100,12 +98,11 @@ class NetworkManager {
         final jsonResponse = jsonDecode(response.body);
         _revision = jsonResponse['revision'];
       } else {
-        print(response.statusCode);
       }
     }
     catch(e)
     {
-      throw e;
+      rethrow;
     }
 
 

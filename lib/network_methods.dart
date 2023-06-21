@@ -24,7 +24,6 @@ changeTileNetwork(TileData tile) {
           ).toJson(),
           tile.id!)
       .then((value) {
-    print(value);
   });
 }
 
@@ -42,7 +41,6 @@ addNewTileNetwork(TileData tile) {
     lastUpdatedBy: "1",
   ).toJson())
       .then((value) {
-    print(value);
   });
 }
 changeListNetwork(List<dynamic> list)
