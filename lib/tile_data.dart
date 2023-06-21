@@ -47,50 +47,49 @@ class TileData {
 
   String toJson() {
     String importance;
-    if(relevance == 0) {
+    if (relevance == 0) {
       importance = 'basic';
-    } else
-      if(relevance == 1) {
-        importance = 'low';
-      } else {
-        importance = 'important';
-      }
-
-    return jsonEncode({
-      'element':{
-      'text': note,
-      if(date != null) 'deadline': date!.toUtc().millisecondsSinceEpoch,
-      'id': id,
-      'done': isDone,
-      'changed_at': changedAt!.toUtc().millisecondsSinceEpoch,
-      'created_at': createdAt!.toUtc().millisecondsSinceEpoch,
-      'color': color,
-      'last_updated_by': lastUpdatedBy,
-      'importance' : importance,}
-    });
-  }
-  String toJsonPersistence() {
-    String importance;
-    if(relevance == 0) {
-      importance = 'basic';
-    } else
-    if(relevance == 1) {
+    } else if (relevance == 1) {
       importance = 'low';
     } else {
       importance = 'important';
     }
 
     return jsonEncode({
+      'element': {
         'text': note,
-        if(date != null) 'deadline': date!.toUtc().millisecondsSinceEpoch,
+        if (date != null) 'deadline': date!.toUtc().millisecondsSinceEpoch,
         'id': id,
         'done': isDone,
         'changed_at': changedAt!.toUtc().millisecondsSinceEpoch,
         'created_at': createdAt!.toUtc().millisecondsSinceEpoch,
         'color': color,
         'last_updated_by': lastUpdatedBy,
-        'importance' : importance,
+        'importance': importance,
+      }
+    });
+  }
+
+  String toJsonPersistence() {
+    String importance;
+    if (relevance == 0) {
+      importance = 'basic';
+    } else if (relevance == 1) {
+      importance = 'low';
+    } else {
+      importance = 'important';
     }
-    );
+
+    return jsonEncode({
+      'text': note,
+      if (date != null) 'deadline': date!.toUtc().millisecondsSinceEpoch,
+      'id': id,
+      'done': isDone,
+      'changed_at': changedAt!.toUtc().millisecondsSinceEpoch,
+      'created_at': createdAt!.toUtc().millisecondsSinceEpoch,
+      'color': color,
+      'last_updated_by': lastUpdatedBy,
+      'importance': importance,
+    });
   }
 }

@@ -7,7 +7,7 @@ import '../my_list.dart';
 import '../navigate/navigation.dart';
 import 'package:logger/logger.dart';
 
-var logger = Logger();//
+var logger = Logger(); //
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: CustomScrollView(
         slivers: [
-          MySliverAppBar( isVis: isVis, updateParent: (bool newValue) => updateIsVis(newValue)),
+          MySliverAppBar(isVis: isVis, updateParent: (bool newValue) => updateIsVis(newValue)),
           SliverPadding(
             padding: const EdgeInsets.only(
               left: 8,

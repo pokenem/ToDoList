@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-
 import '../network_methods.dart';
 import '../persistence_methods.dart';
 import '../theme/app_color.dart';
 import '../page/home_page.dart';
 import '../my_list.dart';
 import '../navigate/navigation.dart';
-
 
 class CustomTile extends StatefulWidget {
   final int index;
@@ -35,7 +33,6 @@ class _CustomTileState extends State<CustomTile> {
     super.initState();
     index = widget.index;
   }
-
 
   @override
   Widget build(BuildContext context) {

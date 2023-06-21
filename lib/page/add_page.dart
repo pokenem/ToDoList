@@ -243,11 +243,12 @@ class _AddPageState extends State<AddPage> {
                             'Сделать до',
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
-                          subtitle: light! ? Text(
-                              '${date!.year}/${date!.month}/${date!.day}',
-                              style: Theme.of(context).textTheme.displaySmall,
-                            ) : const SizedBox.shrink(),
-
+                          subtitle: light!
+                              ? Text(
+                                  '${date!.year}/${date!.month}/${date!.day}',
+                                  style: Theme.of(context).textTheme.displaySmall,
+                                )
+                              : const SizedBox.shrink(),
                           value: light!,
                           onChanged: (bool? value) async {
                             logger.i('Pressed switch in AddPage for tile with index $index');
@@ -270,11 +271,9 @@ class _AddPageState extends State<AddPage> {
                               setState(() {
                                 date = newDate;
                               });
+                            } else {
+                              date = null;
                             }
-                            else
-                              {
-                                date = null;
-                              }
                             setState(() {});
                           },
                         ),

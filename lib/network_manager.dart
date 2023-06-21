@@ -19,35 +19,27 @@ class NetworkManager {
       );
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
-       // print(jsonResponse);
-          data = jsonResponse['list'];
-          _revision = jsonResponse['revision'];
-      } else {
-      }
-    }
-    catch(e)
-    {
+        // print(jsonResponse);
+        data = jsonResponse['list'];
+        _revision = jsonResponse['revision'];
+      } else {}
+    } catch (e) {
       rethrow;
     }
-      return data;
-
-
+    return data;
   }
+
   Future<dynamic> postData(String body) async {
     try {
       final response = await http.post(
         Uri.parse(_url),
-        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision" : "$_revision"},
+        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision": "$_revision"},
         body: body,
       );
       _revision = jsonDecode(response.body)['revision'];
       if (response.statusCode == 200) {
-
-      } else {
-      }
-    }
-    catch(e)
-    {
+      } else {}
+    } catch (e) {
       rethrow;
     }
   }
@@ -62,52 +54,39 @@ class NetworkManager {
       _revision = jsonDecode(response.body)['revision'];
 
       if (response.statusCode == 200) {
-      } else {
-      }
-    }
-    catch (e) {
+      } else {}
+    } catch (e) {
       rethrow;
     }
   }
-    Future<dynamic> deleteData(String id) async {
-      try {
-        final response = await http.delete(
-          Uri.parse("$_url/$id"),
-          headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision" : "$_revision"},
-        );
-        _revision = jsonDecode(response.body)["revision"];
-        if (response.statusCode == 200) {
 
-        } else {
-        }
-      }
-      catch(e)
-      {
-        rethrow;
-      }
+  Future<dynamic> deleteData(String id) async {
+    try {
+      final response = await http.delete(
+        Uri.parse("$_url/$id"),
+        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision": "$_revision"},
+      );
+      _revision = jsonDecode(response.body)["revision"];
+      if (response.statusCode == 200) {
+      } else {}
+    } catch (e) {
+      rethrow;
     }
+  }
 
   Future<dynamic> patchData(String body) async {
     try {
       final response = await http.patch(
         Uri.parse(_url),
-        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision" : "$_revision"},
+        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision": "$_revision"},
         body: body,
       );
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
         _revision = jsonResponse['revision'];
-      } else {
-      }
-    }
-    catch(e)
-    {
+      } else {}
+    } catch (e) {
       rethrow;
     }
-
-
   }
-
-
-
 }

@@ -27,18 +27,17 @@ class PersistenceManager {
       final jsonString = await file.readAsString();
 
       List<dynamic> jsonData = [];
-      if(jsonString != '') {
+      if (jsonString != '') {
         jsonData = jsonDecode(jsonString);
       }
 
       List<Map<String, dynamic>> dataPersistence = [];
-      for(var item in jsonData)
-      {
+      for (var item in jsonData) {
         dataPersistence.add(jsonDecode(item)['element']);
       }
       changeListNetwork(dataPersistence);
       //final jsonData = jsonEncode(networkData);
-     // await file.writeAsString(jsonData, mode: FileMode.write);
+      // await file.writeAsString(jsonData, mode: FileMode.write);
 
       return dataPersistence;
     } catch (e) {
@@ -48,15 +47,14 @@ class PersistenceManager {
     if (await file.exists()) {
       final jsonString = await file.readAsString();
       List<dynamic> jsonData = [];
-      if(jsonString != '') {
+      if (jsonString != '') {
         jsonData = jsonDecode(jsonString);
       }
 
       List<Map<String, dynamic>> dataPersistence = [];
-      for(var item in jsonData)
-        {
-            dataPersistence.add(jsonDecode(item)['element']);
-        }
+      for (var item in jsonData) {
+        dataPersistence.add(jsonDecode(item)['element']);
+      }
       return dataPersistence;
     } else {
       return [];

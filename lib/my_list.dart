@@ -1,8 +1,7 @@
 import 'package:tdlist/tile_data.dart';
 import 'package:uuid/uuid.dart';
 
-String nextID()
-{
+String nextID() {
   return const Uuid().v4();
 }
 

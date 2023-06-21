@@ -7,17 +7,14 @@ import 'my_list.dart';
 import 'theme/app_theme.dart';
 import 'navigate/navigation.dart';
 
-
 var persistenceManager = PersistenceManager();
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  persistenceManager.getDataPersistence().then((list)
-  {
-    for(var item in list)
-      {
-          tasks.add(TileData.fromJson(item));
-      }
+  persistenceManager.getDataPersistence().then((list) {
+    for (var item in list) {
+      tasks.add(TileData.fromJson(item));
+    }
     runApp(
       MaterialApp(
         theme: AppTheme.lightTheme,
