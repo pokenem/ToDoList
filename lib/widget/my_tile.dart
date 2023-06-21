@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tdlist/main.dart';
 
 import '../network_methods.dart';
+import '../persistence_methods.dart';
 import '../theme/app_color.dart';
 import '../page/home_page.dart';
 import '../my_list.dart';
@@ -50,6 +51,7 @@ class _CustomTileState extends State<CustomTile> {
             Future.delayed(const Duration(milliseconds: 250), () {
               tasks[index].isDone = !tasks[index].isDone!;
               changeTileNetwork(tasks[index!]);
+              changePersistence();
               widget.updateParent();
             });
             return false;
@@ -59,6 +61,7 @@ class _CustomTileState extends State<CustomTile> {
           logger.i('Tile swiped left and element with index $index deleted from list');
           delTileNetwork(tasks[index!].id);
           tasks.removeAt(index);
+          changePersistence();
           widget.updateParent();
         },
         onUpdate: (DismissUpdateDetails details) {
@@ -152,6 +155,7 @@ class _CustomTileState extends State<CustomTile> {
                       logger.i('Pressed checkbox and element with index $index changed his state');
                       tasks[index].isDone = value;
                       changeTileNetwork(tasks[index!]);
+                      changePersistence();
                       widget.updateParent();
                     },
                   ),

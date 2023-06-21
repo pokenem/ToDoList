@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tdlist/main.dart';
 import 'package:tdlist/network_manager.dart';
 import 'package:tdlist/network_methods.dart';
+import 'package:tdlist/persistence_methods.dart';
 
 import '../theme/app_color.dart';
 import '../tile_data.dart';
@@ -94,6 +95,7 @@ class _AddPageState extends State<AddPage> {
                             tasks[index!].date = null;
                           }
                           changeTileNetwork(tasks[index!]);
+                          changePersistence();
                         } else {
                           tasks.add(TileData(
                             note: note,
@@ -107,6 +109,7 @@ class _AddPageState extends State<AddPage> {
                             lastUpdatedBy: "1",
                           ));
                           addNewTileNetwork(tasks[index!]);
+                          changePersistence();
                         }
                         NavigationManager.instance.pop();
                       }
@@ -299,6 +302,7 @@ class _AddPageState extends State<AddPage> {
                             logger.i('Pressed tile Удалить in AddPage');
                             delTileNetwork(tasks[index!].id);
                             tasks.removeAt(index!);
+                            changePersistence();
                             NavigationManager.instance.pop();
                           }
                         : null,

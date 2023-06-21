@@ -24,24 +24,24 @@ class TileData {
     this.lastUpdatedBy,
   });
 
-  factory TileData.fromJson(Map<String, dynamic> json) {
+  factory TileData.fromJson(Map<String, dynamic> jsonData) {
     int relevance;
-    if (json["importance"] == "basic") {
+    if (jsonData['importance'] == 'basic') {
       relevance = 0;
-    } else if (json["importance"] == "low") {
+    } else if (jsonData['importance'] == 'low') {
       relevance = 1;
     } else {
       relevance = 2;
     }
     return TileData(
-      note: json["text"],
-      date: json["deadline"] == null ? null : DateTime.fromMillisecondsSinceEpoch(json["deadline"]),
-      id: json["id"],
-      isDone: json["done"],
-      changedAt: DateTime.fromMillisecondsSinceEpoch(json["changed_at"]),
-      createdAt: DateTime.fromMillisecondsSinceEpoch(json["created_at"]),
-      color: json["color"],
-      lastUpdatedBy: json["last_updated_by"],
+      note: jsonData['text'],
+      date: jsonData['deadline'] == null ? null : DateTime.fromMillisecondsSinceEpoch(jsonData['deadline']),
+      id: jsonData['id'],
+      isDone: jsonData['done'],
+      changedAt: DateTime.fromMillisecondsSinceEpoch(jsonData['changed_at']),
+      createdAt: DateTime.fromMillisecondsSinceEpoch(jsonData['created_at']),
+      color: jsonData['color'],
+      lastUpdatedBy: jsonData['last_updated_by'],
       relevance: relevance,
     );
   }
@@ -49,25 +49,49 @@ class TileData {
   String toJson() {
     String importance;
     if(relevance == 0) {
-      importance = "basic";
+      importance = 'basic';
     } else
       if(relevance == 1) {
-        importance = "low";
+        importance = 'low';
       } else {
-        importance = "important";
+        importance = 'important';
       }
 
     return jsonEncode({
-      "element":{
-      "text": note,
-      if(date != null) "deadline": date!.toUtc().millisecondsSinceEpoch,
-      "id": id,
-      "done": isDone,
-      "changed_at": changedAt!.toUtc().millisecondsSinceEpoch,
-      "created_at": createdAt!.toUtc().millisecondsSinceEpoch,
-      "color": color,
-      "last_updated_by": lastUpdatedBy,
-      "importance" : importance,}
+      'element':{
+      'text': note,
+      if(date != null) 'deadline': date!.toUtc().millisecondsSinceEpoch,
+      'id': id,
+      'done': isDone,
+      'changed_at': changedAt!.toUtc().millisecondsSinceEpoch,
+      'created_at': createdAt!.toUtc().millisecondsSinceEpoch,
+      'color': color,
+      'last_updated_by': lastUpdatedBy,
+      'importance' : importance,}
     });
+  }
+  String toJsonPersistence() {
+    String importance;
+    if(relevance == 0) {
+      importance = 'basic';
+    } else
+    if(relevance == 1) {
+      importance = 'low';
+    } else {
+      importance = 'important';
+    }
+
+    return jsonEncode({
+        'text': note,
+        if(date != null) 'deadline': date!.toUtc().millisecondsSinceEpoch,
+        'id': id,
+        'done': isDone,
+        'changed_at': changedAt!.toUtc().millisecondsSinceEpoch,
+        'created_at': createdAt!.toUtc().millisecondsSinceEpoch,
+        'color': color,
+        'last_updated_by': lastUpdatedBy,
+        'importance' : importance,
+    }
+    );
   }
 }

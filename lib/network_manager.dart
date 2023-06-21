@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:tdlist/tile_data.dart';
-
+import 'package:tdlist/token.dart';
 
 class NetworkManager {
   static const _url = "https://beta.mrdekk.ru/todobackend/list";
@@ -16,11 +15,11 @@ class NetworkManager {
     try {
       final response = await http.get(
         Uri.parse(_url),
-        headers: {"Authorization": "Bearer unthrilling"},
+        headers: {"Authorization": "Bearer $token"},
       );
       if (response.statusCode == 200) {
-        final jsonResponse = json.decode(response.body);
-        print(jsonResponse);
+        final jsonResponse = jsonDecode(response.body);
+       // print(jsonResponse);
           data = jsonResponse['list'];
           _revision = jsonResponse['revision'];
       } else {
@@ -39,7 +38,7 @@ class NetworkManager {
     try {
       final response = await http.post(
         Uri.parse(_url),
-        headers: {"Authorization": "Bearer unthrilling", "X-Last-Known-Revision" : "$_revision"},
+        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision" : "$_revision"},
         body: body,
       );
       _revision = jsonDecode(response.body)['revision'];
@@ -58,7 +57,7 @@ class NetworkManager {
     try {
       final response = await http.put(
         Uri.parse("$_url/$id"),
-        headers: {"Authorization": "Bearer unthrilling", "X-Last-Known-Revision": "$_revision"},
+        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision": "$_revision"},
         body: body,
       );
       _revision = jsonDecode(response.body)['revision'];
@@ -76,7 +75,7 @@ class NetworkManager {
       try {
         final response = await http.delete(
           Uri.parse("$_url/$id"),
-          headers: {"Authorization": "Bearer unthrilling", "X-Last-Known-Revision" : "$_revision"},
+          headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision" : "$_revision"},
         );
         _revision = jsonDecode(response.body)["revision"];
         if (response.statusCode == 200) {
@@ -89,6 +88,28 @@ class NetworkManager {
         throw e;
       }
     }
+
+  Future<dynamic> patchData(String body) async {
+    try {
+      final response = await http.patch(
+        Uri.parse(_url),
+        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision" : "$_revision"},
+        body: body,
+      );
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+        _revision = jsonResponse['revision'];
+      } else {
+        print(response.statusCode);
+      }
+    }
+    catch(e)
+    {
+      throw e;
+    }
+
+
+  }
 
 
 

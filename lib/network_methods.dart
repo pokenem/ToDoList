@@ -1,6 +1,8 @@
+import 'dart:convert';
+
+import 'package:tdlist/persistence_manager.dart';
 import 'package:tdlist/tile_data.dart';
 
-import 'main.dart';
 
 delTileNetwork(String? id) {
   networkManager.deleteData(id!);
@@ -42,4 +44,8 @@ addNewTileNetwork(TileData tile) {
       .then((value) {
     print(value);
   });
+}
+changeListNetwork(List<dynamic> list)
+{
+    networkManager.patchData(jsonEncode({'list': list}));
 }
