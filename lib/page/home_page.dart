@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../l10n/s.dart';
 import '../theme/app_color.dart';
 import '../widget/my_sliverBar.dart';
 import '../widget/my_tile.dart';
 import '../data/my_list.dart';
 import '../navigate/navigation.dart';
 import 'package:logger/logger.dart';
+
+import '../widget/new_tile.dart';
 
 var logger = Logger(); //
 
@@ -28,8 +29,8 @@ class _MyHomePageState extends State<MyHomePage> {
       isVis = newValue;
     });
   }
-  onPressedFloatingActionButton()
-  {
+
+  onPressedFloatingActionButton() {
     logger.i('Pressed FloatingActionButton in MyHomePage');
     NavigationManager.instance.openAdd(tasks.length).then((_) {
       setState(() {});
@@ -50,7 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressedFloatingActionButton();
         },
       ),
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme
+          .of(context)
+          .colorScheme
+          .primary,
       body: CustomScrollView(
         slivers: [
           MySliverAppBar(isVis: isVis, updateParent: (bool newValue) => updateIsVis(newValue)),
@@ -63,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
-                (context, index) {
+                    (context, index) {
                   if (!isVis) {
                     if (index != tasks.length) {
                       if (tasks[index].isDone!) {
@@ -78,7 +82,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         );
                       }
                     } else {
-                      return newTile(index);
+                      return NewTile(index: index,
+                        isVis: isVis,
+                        updateParent: () {
+                          setState(() {});
+                        },
+                      );
                     }
                   } else if (index != tasks.length) {
                     return CustomTile(
@@ -89,7 +98,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                     );
                   } else {
-                    return newTile(index);
+                    return NewTile(index: index,
+                      isVis: isVis,
+                      updateParent: () {
+                        setState(() {});
+                      },
+                    );
                   }
                 },
                 childCount: tasks.length + 1, //isVis ? tasks.length + 1 : tasks.length - kol + 1,
@@ -101,45 +115,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  int whatTheFirst() {
-    int k = 0;
-    if (!isVis) {
-      while (k < tasks.length && tasks[k].isDone!) {
-        k++;
-      }
-    }
-    return k;
-  }
-
-  Widget newTile(index) {
-    return ListTile(
-      titleTextStyle: Theme.of(context).textTheme.labelSmall,
-      shape: whatTheFirst() == tasks.length
-          ? RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            )
-          : const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(8),
-              ),
-            ),
-      tileColor: Theme.of(context).colorScheme.onPrimary,
-      onTap: () {
-        logger.i('Pressed tile ${S.of(context).get('new')} in MyHomePage');
-        currentIndex = index;
-        NavigationManager.instance.openAdd(currentIndex).then((_) {
-          setState(() {});
-        });
-      },
-      title: Padding(
-        // ignore: prefer_const_constructors
-        padding: EdgeInsets.only(
-          left: 36,
-        ),
-        child: Text(
-          S.of(context).get('new'),
-        ),
-      ),
-    );
-  }
 }

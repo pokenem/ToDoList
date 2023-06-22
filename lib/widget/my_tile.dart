@@ -58,6 +58,14 @@ class CustomTileState extends State<CustomTile> {
       shift = details.progress;
     });
   }
+  onTapListTile()
+  {
+    currentIndex = index;
+    logger.i('Pressed on tile in MyHomePage');
+    NavigationManager.instance.openAdd(currentIndex).then((_) {
+      widget.updateParent();
+    });
+  }
 
 
   @override
@@ -114,11 +122,7 @@ class CustomTileState extends State<CustomTile> {
         ),
         child: ListTile(
           onTap: () {
-            currentIndex = index;
-            logger.i('Pressed on tile in MyHomePage');
-            NavigationManager.instance.openAdd(currentIndex).then((_) {
-              widget.updateParent();
-            });
+            onTapListTile();
           },
           shape: index == whatTheFirst()
               ? const RoundedRectangleBorder(
