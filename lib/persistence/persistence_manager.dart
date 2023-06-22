@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:tdlist/network_methods.dart';
+import 'package:tdlist/network/network_methods.dart';
 import 'package:tdlist/page/home_page.dart';
 
-import 'network_manager.dart';
+import '../network/network_manager.dart';
 
 var networkManager = NetworkManager();
 

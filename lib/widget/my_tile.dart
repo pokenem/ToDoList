@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../network_methods.dart';
-import '../persistence_methods.dart';
+import '../network/network_methods.dart';
+import '../persistence/persistence_methods.dart';
 import '../theme/app_color.dart';
 import '../page/home_page.dart';
-import '../my_list.dart';
+import '../data/my_list.dart';
 import '../navigate/navigation.dart';
 
 class CustomTile extends StatefulWidget {
@@ -20,10 +20,10 @@ class CustomTile extends StatefulWidget {
   });
 
   @override
-  _CustomTileState createState() => _CustomTileState();
+  CustomTileState createState() => CustomTileState();
 }
 
-class _CustomTileState extends State<CustomTile> {
+class CustomTileState extends State<CustomTile> {
   double shift = 0;
   int currentIndex = 0;
   int index = 0;
@@ -33,6 +33,32 @@ class _CustomTileState extends State<CustomTile> {
     super.initState();
     index = widget.index;
   }
+
+  double iconPadding() {
+    return shift * (MediaQuery.of(context).size.width - 16) - 40 >= 28 ? shift * (MediaQuery.of(context).size.width - 16) - 48 : 20;
+  }
+  onConfirmDismissTile()
+  {
+    tasks[index].isDone = !tasks[index].isDone!;
+    changeTileNetwork(tasks[index]);
+    changePersistence();
+    widget.updateParent();
+  }
+  onDismissedTile()
+  {
+    logger.i('Tile swiped left and element with index $index deleted from list');
+    delTileNetwork(tasks[index].id);
+    tasks.removeAt(index);
+    changePersistence();
+    widget.updateParent();
+  }
+  onUpdateTile(dynamic details)
+  {
+    setState(() {
+      shift = details.progress;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,25 +72,16 @@ class _CustomTileState extends State<CustomTile> {
           } else {
             logger.i('Tile swiped right and element with index $index changed his state');
             Future.delayed(const Duration(milliseconds: 250), () {
-              tasks[index].isDone = !tasks[index].isDone!;
-              changeTileNetwork(tasks[index]);
-              changePersistence();
-              widget.updateParent();
+             onConfirmDismissTile();
             });
             return false;
           }
         },
         onDismissed: (DismissDirection direction) {
-          logger.i('Tile swiped left and element with index $index deleted from list');
-          delTileNetwork(tasks[index].id);
-          tasks.removeAt(index);
-          changePersistence();
-          widget.updateParent();
+         onDismissedTile();
         },
         onUpdate: (DismissUpdateDetails details) {
-          setState(() {
-            shift = details.progress;
-          });
+         onUpdateTile(details);
         },
         background: Container(
           decoration: BoxDecoration(
@@ -76,8 +93,7 @@ class _CustomTileState extends State<CustomTile> {
                 : null,
           ),
           alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(
-              left: shift * (MediaQuery.of(context).size.width - 16) - 40 >= 28 ? shift * (MediaQuery.of(context).size.width - 16) - 48 : 20),
+          padding: EdgeInsets.only(left: iconPadding()),
           child: tasks[index].isDone! ? const Icon(Icons.close, color: AppColor.clWhite) : const Icon(Icons.check, color: AppColor.clWhite),
         ),
         secondaryBackground: Container(
@@ -90,8 +106,7 @@ class _CustomTileState extends State<CustomTile> {
                 : null,
           ),
           alignment: Alignment.centerRight,
-          padding: EdgeInsets.only(
-              right: shift * (MediaQuery.of(context).size.width - 16) - 40 >= 28 ? shift * (MediaQuery.of(context).size.width - 16) - 48 : 20),
+          padding: EdgeInsets.only(right: iconPadding()),
           child: const Icon(
             Icons.delete,
             color: Colors.white,

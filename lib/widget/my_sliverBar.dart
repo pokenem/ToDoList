@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../l10n/s.dart';
 import '../theme/app_color.dart';
 import '../page/home_page.dart';
-import '../my_list.dart';
+import '../data/my_list.dart';
+
 
 class MySliverAppBar extends StatelessWidget {
   final bool isVis;
@@ -66,7 +68,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                 bottom: 44 - (44 * shrinkOffset / 106) >= 16 ? 44 - (44 * shrinkOffset / 106) : 16,
               ),
               child: Text(
-                'Мои дела',
+                S.of(context).get('myTasks'),
                 style: TextStyle(
                   fontSize: 32 - 12 * ((shrinkOffset / 106).clamp(0, 1)),
                   height: 1.6 - 0.4125 * ((shrinkOffset / 106).clamp(0, 1)),
@@ -83,7 +85,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
               child: Opacity(
                 opacity: (1 - (shrinkOffset / 26)).clamp(0, 1),
                 child: Text(
-                  'Выполнено — ${howMuch()}',
+                  '${S.of(context).get('done')} — ${howMuch()}',
                   style: const TextStyle(
                     fontSize: 16,
                     height: 1.25,

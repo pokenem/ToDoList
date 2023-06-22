@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/s.dart';
 import '../theme/app_color.dart';
 import '../widget/my_sliverBar.dart';
 import '../widget/my_tile.dart';
-import '../my_list.dart';
+import '../data/my_list.dart';
 import '../navigate/navigation.dart';
 import 'package:logger/logger.dart';
 
@@ -27,6 +28,13 @@ class _MyHomePageState extends State<MyHomePage> {
       isVis = newValue;
     });
   }
+  onPressedFloatingActionButton()
+  {
+    logger.i('Pressed FloatingActionButton in MyHomePage');
+    NavigationManager.instance.openAdd(tasks.length).then((_) {
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
           color: AppColor.clWhite,
         ),
         onPressed: () {
-          logger.i('Pressed FloatingActionButton in MyHomePage');
-          NavigationManager.instance.openAdd(tasks.length).then((_) {
-            setState(() {});
-          });
+          onPressedFloatingActionButton();
         },
       ),
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -120,18 +125,19 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
       tileColor: Theme.of(context).colorScheme.onPrimary,
       onTap: () {
-        logger.i('Pressed tile Новое in MyHomePage');
+        logger.i('Pressed tile ${S.of(context).get('new')} in MyHomePage');
         currentIndex = index;
         NavigationManager.instance.openAdd(currentIndex).then((_) {
           setState(() {});
         });
       },
-      title: const Padding(
+      title: Padding(
+        // ignore: prefer_const_constructors
         padding: EdgeInsets.only(
           left: 36,
         ),
         child: Text(
-          'Новое',
+          S.of(context).get('new'),
         ),
       ),
     );

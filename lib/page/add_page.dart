@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tdlist/network_methods.dart';
-import 'package:tdlist/persistence_methods.dart';
+import 'package:tdlist/network/network_methods.dart';
+import 'package:tdlist/persistence/persistence_methods.dart';
 
+import '../l10n/s.dart';
 import '../theme/app_color.dart';
-import '../tile_data.dart';
+import '../data/tile_data.dart';
 import 'home_page.dart';
-import '../my_list.dart';
+import '../data/my_list.dart';
 import '../navigate/navigation.dart';
 
 class AddPage extends StatefulWidget {
@@ -57,10 +58,66 @@ class _AddPageState extends State<AddPage> {
       isSave = true;
     }
   }
+  changeTask()
+  {
+    tasks[index!].changedAt = DateTime.now();
+    tasks[index!].note = note;
+
+    tasks[index!].relevance = editRelevance;
+    if (light!) {
+      tasks[index!].date = date;
+    } else {
+      tasks[index!].date = null;
+    }
+    changeTileNetwork(tasks[index!]);
+    changePersistence();
+  }
+  addTask()
+  {
+    tasks.add(TileData(
+      note: note,
+      relevance: editRelevance,
+      date: date,
+      isDone: false,
+      id: nextID(),
+      changedAt: DateTime.now(),
+      createdAt: DateTime.now(),
+      color: "#FFFFFF",
+      lastUpdatedBy: "1",
+    ));
+    addNewTileNetwork(tasks[index!]);
+    changePersistence();
+  }
+  onChangedTextField()
+  {
+    setState(() {
+      note = _controller!.text;
+      if (note != '') {
+        isSave = true;
+      } else {
+        isSave = false;
+      }
+    });
+  }
+  onChangedRelevance(int newValue)
+  {
+    logger.i('User changed relevance in tile with index $index');
+    setState(() {
+      editRelevance = newValue;
+    });
+  }
+  onTapDeleteButton()
+  {
+    logger.i('Pressed tile ${S.of(context).get('delete')} in AddPage');
+    delTileNetwork(tasks[index!].id);
+    tasks.removeAt(index!);
+    changePersistence();
+    NavigationManager.instance.pop();
+  }
 
   @override
   Widget build(BuildContext context) {
-    List<String> relevance = ['Нет', 'Низкий', '‼ Высокий'];
+    List<String> relevance = [S.of(context).get('no'), S.of(context).get('low'), '‼ ${S.of(context).get('high')}'];
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: CustomScrollView(
@@ -81,33 +138,11 @@ class _AddPageState extends State<AddPage> {
               TextButton(
                 onPressed: isSave!
                     ? () {
-                        logger.i('Pressed text button СОХРАНИТЬ in AddPage');
+                        logger.i('Pressed text button ${S.of(context).get('save')} in AddPage');
                         if (delEnable!) {
-                          tasks[index!].changedAt = DateTime.now();
-                          tasks[index!].note = note;
-
-                          tasks[index!].relevance = editRelevance;
-                          if (light!) {
-                            tasks[index!].date = date;
-                          } else {
-                            tasks[index!].date = null;
-                          }
-                          changeTileNetwork(tasks[index!]);
-                          changePersistence();
+                         changeTask();
                         } else {
-                          tasks.add(TileData(
-                            note: note,
-                            relevance: editRelevance,
-                            date: date,
-                            isDone: false,
-                            id: nextID(),
-                            changedAt: DateTime.now(),
-                            createdAt: DateTime.now(),
-                            color: "#FFFFFF",
-                            lastUpdatedBy: "1",
-                          ));
-                          addNewTileNetwork(tasks[index!]);
-                          changePersistence();
+                          addTask();
                         }
                         NavigationManager.instance.pop();
                       }
@@ -117,7 +152,7 @@ class _AddPageState extends State<AddPage> {
                     right: 8,
                   ),
                   child: Text(
-                    'СОХРАНИТЬ',
+                    S.of(context).get('save'),
                     style: isSave! ? Theme.of(context).textTheme.displayMedium : Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
@@ -143,14 +178,7 @@ class _AddPageState extends State<AddPage> {
                       borderRadius: BorderRadius.circular(8.0),
                       child: TextField(
                         onChanged: (value) {
-                          setState(() {
-                            note = _controller!.text;
-                            if (note != '') {
-                              isSave = true;
-                            } else {
-                              isSave = false;
-                            }
-                          });
+                          onChangedTextField();
                         },
                         minLines: 5,
                         maxLines: null,
@@ -159,7 +187,7 @@ class _AddPageState extends State<AddPage> {
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(16),
                             border: InputBorder.none,
-                            hintText: 'Что надо сделать...',
+                            hintText: S.of(context).get('whatToDo'),
                             hintStyle: Theme.of(context).textTheme.labelSmall,
                             filled: true,
                             fillColor: Theme.of(context).colorScheme.onPrimary),
@@ -178,7 +206,7 @@ class _AddPageState extends State<AddPage> {
                     children: [
                       ListTile(
                         title: Text(
-                          'Важность',
+                          S.of(context).get('relevance'),
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         contentPadding: const EdgeInsets.all(0),
@@ -188,10 +216,7 @@ class _AddPageState extends State<AddPage> {
                             value: editRelevance,
                             iconSize: 0,
                             onChanged: (int? newValue) {
-                              logger.i('User changed relevance in tile with index $index');
-                              setState(() {
-                                editRelevance = newValue!;
-                              });
+                              onChangedRelevance(newValue!);
                             },
                             items: [
                               DropdownMenuItem<int>(
@@ -240,7 +265,7 @@ class _AddPageState extends State<AddPage> {
                           inactiveThumbColor: AppColor.clBlue,
                           contentPadding: EdgeInsets.zero,
                           title: Text(
-                            'Сделать до',
+                            S.of(context).get('doBefore'),
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           subtitle: light!
@@ -296,11 +321,7 @@ class _AddPageState extends State<AddPage> {
                   child: ListTile(
                     onTap: delEnable!
                         ? () {
-                            logger.i('Pressed tile Удалить in AddPage');
-                            delTileNetwork(tasks[index!].id);
-                            tasks.removeAt(index!);
-                            changePersistence();
-                            NavigationManager.instance.pop();
+                            onTapDeleteButton();
                           }
                         : null,
                     contentPadding: const EdgeInsets.all(0),
@@ -309,7 +330,7 @@ class _AddPageState extends State<AddPage> {
                       color: delEnable! ? AppColor.clRed : AppColor.labelDisable,
                     ),
                     title: Text(
-                      'Удалить',
+                      S.of(context).get('delete'),
                       style: delEnable! ? Theme.of(context).textTheme.headlineMedium : Theme.of(context).textTheme.displayLarge,
                     ),
                   ),

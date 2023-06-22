@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tdlist/navigate/routes.dart';
-import 'package:tdlist/persistence_manager.dart';
-import 'package:tdlist/tile_data.dart';
+import 'package:tdlist/persistence/persistence_manager.dart';
+import 'package:tdlist/l10n/s.dart';
+import 'package:tdlist/data/tile_data.dart';
 
-import 'my_list.dart';
+import 'data/my_list.dart';
 import 'theme/app_theme.dart';
 import 'navigate/navigation.dart';
 
@@ -17,6 +18,8 @@ void main() {
     }
     runApp(
       MaterialApp(
+        localizationsDelegates: S.localizationsDelegates,
+        supportedLocales: S.supportedLocales,
         theme: AppTheme.lightTheme,
         routes: RoutesBuilder.routes,
         navigatorKey: NavigationManager.instance.key,

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:tdlist/persistence_manager.dart';
-import 'package:tdlist/tile_data.dart';
+import 'package:tdlist/persistence/persistence_manager.dart';
+import 'package:tdlist/data/tile_data.dart';
 
 delTileNetwork(String? id) {
   networkManager.deleteData(id!);
