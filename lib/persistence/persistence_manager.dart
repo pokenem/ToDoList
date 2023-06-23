@@ -43,30 +43,28 @@ class PersistenceManager {
     return dataPersistence;
   }
 
-  Future<void> putDataPersistence(Map<String, dynamic> tile, int index) async{
+  Future<void> putDataPersistence(Map<String, dynamic> tile, int index) async {
     final database = await _openDatabase();
     final store = await _getStoreRef(database);
 
     await store.record(tile['id']).put(database, tile);
 
-
     await database.close();
   }
 
-  Future<void> postDataPersistence(Map<String, dynamic> tile) async{
+  Future<void> postDataPersistence(Map<String, dynamic> tile) async {
     final database = await _openDatabase();
     final store = await _getStoreRef(database);
     await store.record(tile['id']).add(database, tile);
     await database.close();
   }
 
-  Future<void> deleteDataPersistence(Map<String,dynamic> tile) async{
+  Future<void> deleteDataPersistence(Map<String, dynamic> tile) async {
     final database = await _openDatabase();
     final store = await _getStoreRef(database);
     await store.delete(database, finder: Finder(filter: Filter.byKey(tile['id'])));
     await database.close();
   }
-
 
   Future<void> patchDataPersistence(List<dynamic> list) async {
     final database = await _openDatabase();

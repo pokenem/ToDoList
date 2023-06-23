@@ -6,15 +6,15 @@ import '../data/tile_data.dart';
 changePersistence() {
   persistenceManager.patchDataPersistence(tasks);
 }
-addNewTilePersistence(TileData tile)
-{
+
+addNewTilePersistence(TileData tile) {
   persistenceManager.postDataPersistence(tile.toMapPersistence());
 }
-changeTilePersistence(TileData tile, int index)
-{
+
+changeTilePersistence(TileData tile, int index) {
   persistenceManager.putDataPersistence(tile.toMapPersistence(), index);
 }
-deleteTilePersistence(TileData tile)
-{
+
+deleteTilePersistence(TileData tile) {
   persistenceManager.deleteDataPersistence(tile.toMapPersistence());
 }

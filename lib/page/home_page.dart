@@ -51,10 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressedFloatingActionButton();
         },
       ),
-      backgroundColor: Theme
-          .of(context)
-          .colorScheme
-          .primary,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: CustomScrollView(
         slivers: [
           MySliverAppBar(isVis: isVis, updateParent: (bool newValue) => updateIsVis(newValue)),
@@ -67,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
-                    (context, index) {
+                (context, index) {
                   if (!isVis) {
                     if (index != tasks.length) {
                       if (tasks[index].isDone!) {
@@ -82,7 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         );
                       }
                     } else {
-                      return NewTile(index: index,
+                      return NewTile(
+                        index: index,
                         isVis: isVis,
                         updateParent: () {
                           setState(() {});
@@ -98,7 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                     );
                   } else {
-                    return NewTile(index: index,
+                    return NewTile(
+                      index: index,
                       isVis: isVis,
                       updateParent: () {
                         setState(() {});
@@ -114,5 +113,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import '../l10n/s.dart';
+import '../localization/s.dart';
 import '../theme/app_color.dart';
 import '../page/home_page.dart';
 import '../data/my_list.dart';
-
 
 class MySliverAppBar extends StatelessWidget {
   final bool isVis;

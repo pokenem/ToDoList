@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/my_list.dart';
-import '../l10n/s.dart';
+import '../localization/s.dart';
 import '../navigate/navigation.dart';
 import '../page/home_page.dart';
 
@@ -24,8 +24,7 @@ class NewTile extends StatefulWidget {
 class NewTileState extends State<NewTile> {
   dynamic currentIndex;
 
-  onTapNewTile()
-  {
+  onTapNewTile() {
     logger.i('Pressed tile ${S.of(context).get('new')} in MyHomePage');
     currentIndex = widget.index;
     NavigationManager.instance.openAdd(currentIndex).then((_) {
@@ -70,5 +69,4 @@ class NewTileState extends State<NewTile> {
     }
     return k;
   }
-
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tdlist/network/network_methods.dart';
 import 'package:tdlist/persistence/persistence_methods.dart';
 
-import '../l10n/s.dart';
+import '../localization/s.dart';
 import '../theme/app_color.dart';
 import '../data/tile_data.dart';
 import 'home_page.dart';
@@ -58,8 +58,8 @@ class _AddPageState extends State<AddPage> {
       isSave = true;
     }
   }
-  changeTask()
-  {
+
+  changeTask() {
     tasks[index!].changedAt = DateTime.now();
     tasks[index!].note = note;
 
@@ -72,8 +72,8 @@ class _AddPageState extends State<AddPage> {
     changeTileNetwork(tasks[index!]);
     changeTilePersistence(tasks[index!], index!);
   }
-  addTask()
-  {
+
+  addTask() {
     tasks.add(TileData(
       note: note,
       relevance: editRelevance,
@@ -88,8 +88,8 @@ class _AddPageState extends State<AddPage> {
     addNewTileNetwork(tasks[index!]);
     addNewTilePersistence(tasks[index!]);
   }
-  onChangedTextField()
-  {
+
+  onChangedTextField() {
     setState(() {
       note = _controller!.text;
       if (note != '') {
@@ -99,15 +99,15 @@ class _AddPageState extends State<AddPage> {
       }
     });
   }
-  onChangedRelevance(int newValue)
-  {
+
+  onChangedRelevance(int newValue) {
     logger.i('User changed relevance in tile with index $index');
     setState(() {
       editRelevance = newValue;
     });
   }
-  onTapDeleteButton()
-  {
+
+  onTapDeleteButton() {
     logger.i('Pressed tile ${S.of(context).get('delete')} in AddPage');
     delTileNetwork(tasks[index!].id);
     deleteTilePersistence(tasks[index!]);
@@ -140,7 +140,7 @@ class _AddPageState extends State<AddPage> {
                     ? () {
                         logger.i('Pressed text button ${S.of(context).get('save')} in AddPage');
                         if (delEnable!) {
-                         changeTask();
+                          changeTask();
                         } else {
                           addTask();
                         }

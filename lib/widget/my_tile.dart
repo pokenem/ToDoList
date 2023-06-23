@@ -37,44 +37,43 @@ class CustomTileState extends State<CustomTile> {
   double iconPadding() {
     return shift * (MediaQuery.of(context).size.width - 16) - 40 >= 28 ? shift * (MediaQuery.of(context).size.width - 16) - 48 : 20;
   }
-  onConfirmDismissTile()
-  {
+
+  onConfirmDismissTile() {
     tasks[index].isDone = !tasks[index].isDone!;
     changeTileNetwork(tasks[index]);
     changeTilePersistence(tasks[index], index);
     widget.updateParent();
   }
-  onDismissedTile()
-  {
+
+  onDismissedTile() {
     logger.i('Tile swiped left and element with index $index deleted from list');
     delTileNetwork(tasks[index].id);
     deleteTilePersistence(tasks[index]);
     tasks.removeAt(index);
     widget.updateParent();
   }
-  onUpdateTile(dynamic details)
-  {
+
+  onUpdateTile(dynamic details) {
     setState(() {
       shift = details.progress;
     });
   }
-  onTapListTile()
-  {
+
+  onTapListTile() {
     currentIndex = index;
     logger.i('Pressed on tile in MyHomePage');
     NavigationManager.instance.openAdd(currentIndex).then((_) {
       widget.updateParent();
     });
   }
-  onChangedCheckBox(bool value)
-  {
+
+  onChangedCheckBox(bool value) {
     logger.i('Pressed checkbox and element with index $index changed his state');
     tasks[index].isDone = value;
     changeTileNetwork(tasks[index]);
     changeTilePersistence(tasks[index], index);
     widget.updateParent();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -88,16 +87,16 @@ class CustomTileState extends State<CustomTile> {
           } else {
             logger.i('Tile swiped right and element with index $index changed his state');
             Future.delayed(const Duration(milliseconds: 250), () {
-             onConfirmDismissTile();
+              onConfirmDismissTile();
             });
             return false;
           }
         },
         onDismissed: (DismissDirection direction) {
-         onDismissedTile();
+          onDismissedTile();
         },
         onUpdate: (DismissUpdateDetails details) {
-         onUpdateTile(details);
+          onUpdateTile(details);
         },
         background: Container(
           decoration: BoxDecoration(
