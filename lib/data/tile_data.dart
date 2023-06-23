@@ -70,7 +70,7 @@ class TileData {
     });
   }
 
-  String toJsonPersistence() {
+  Map<String, dynamic> toMapPersistence() {
     String importance;
     if (relevance == 0) {
       importance = 'basic';
@@ -80,9 +80,9 @@ class TileData {
       importance = 'important';
     }
 
-    return jsonEncode({
+    final noteMap = {
       'text': note,
-      if (date != null) 'deadline': date!.toUtc().millisecondsSinceEpoch,
+      if (date != null) 'deadline': date?.toUtc().millisecondsSinceEpoch,
       'id': id,
       'done': isDone,
       'changed_at': changedAt!.toUtc().millisecondsSinceEpoch,
@@ -90,6 +90,7 @@ class TileData {
       'color': color,
       'last_updated_by': lastUpdatedBy,
       'importance': importance,
-    });
+    };
+    return noteMap;
   }
 }

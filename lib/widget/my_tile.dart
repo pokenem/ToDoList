@@ -41,15 +41,15 @@ class CustomTileState extends State<CustomTile> {
   {
     tasks[index].isDone = !tasks[index].isDone!;
     changeTileNetwork(tasks[index]);
-    changePersistence();
+    changeTilePersistence(tasks[index], index);
     widget.updateParent();
   }
   onDismissedTile()
   {
     logger.i('Tile swiped left and element with index $index deleted from list');
     delTileNetwork(tasks[index].id);
+    deleteTilePersistence(tasks[index]);
     tasks.removeAt(index);
-    changePersistence();
     widget.updateParent();
   }
   onUpdateTile(dynamic details)
@@ -65,6 +65,14 @@ class CustomTileState extends State<CustomTile> {
     NavigationManager.instance.openAdd(currentIndex).then((_) {
       widget.updateParent();
     });
+  }
+  onChangedCheckBox(bool value)
+  {
+    logger.i('Pressed checkbox and element with index $index changed his state');
+    tasks[index].isDone = value;
+    changeTileNetwork(tasks[index]);
+    changeTilePersistence(tasks[index], index);
+    widget.updateParent();
   }
 
 
@@ -168,11 +176,7 @@ class CustomTileState extends State<CustomTile> {
                       },
                     ),
                     onChanged: (bool? value) {
-                      logger.i('Pressed checkbox and element with index $index changed his state');
-                      tasks[index].isDone = value;
-                      changeTileNetwork(tasks[index]);
-                      changePersistence();
-                      widget.updateParent();
+                      onChangedCheckBox(value!);
                     },
                   ),
                 ),

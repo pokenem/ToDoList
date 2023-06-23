@@ -70,7 +70,7 @@ class _AddPageState extends State<AddPage> {
       tasks[index!].date = null;
     }
     changeTileNetwork(tasks[index!]);
-    changePersistence();
+    changeTilePersistence(tasks[index!], index!);
   }
   addTask()
   {
@@ -86,7 +86,7 @@ class _AddPageState extends State<AddPage> {
       lastUpdatedBy: "1",
     ));
     addNewTileNetwork(tasks[index!]);
-    changePersistence();
+    addNewTilePersistence(tasks[index!]);
   }
   onChangedTextField()
   {
@@ -110,8 +110,8 @@ class _AddPageState extends State<AddPage> {
   {
     logger.i('Pressed tile ${S.of(context).get('delete')} in AddPage');
     delTileNetwork(tasks[index!].id);
+    deleteTilePersistence(tasks[index!]);
     tasks.removeAt(index!);
-    changePersistence();
     NavigationManager.instance.pop();
   }
 

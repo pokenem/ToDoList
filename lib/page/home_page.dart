@@ -9,7 +9,7 @@ import 'package:logger/logger.dart';
 
 import '../widget/new_tile.dart';
 
-var logger = Logger(); //
+var logger = Logger();
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
