@@ -11,7 +11,7 @@ var networkManager = NetworkManager();
 class PersistenceManager {
   Future<Database> _openDatabase() async {
     final appDir = await getApplicationDocumentsDirectory();
-    final dbPath = appDir.path + '/my_tasks.db';
+    final dbPath = '${appDir.path}/my_tasks.db';
     final database = await databaseFactoryIo.openDatabase(dbPath);
     return database;
   }
@@ -43,7 +43,7 @@ class PersistenceManager {
     return dataPersistence;
   }
 
-  Future<void> putDataPersistence(Map<String, dynamic> tile, int index) async {
+  Future<void> putDataPersistence(Map<String, dynamic> tile) async {
     final database = await _openDatabase();
     final store = await _getStoreRef(database);
 

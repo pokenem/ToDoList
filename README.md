@@ -11,7 +11,7 @@
 
 ## Ссылки
 
-Ссылка для скачивания apk: https://disk.yandex.ru/d/IVPNbJqKyDJ6OA
+Ссылка для скачивания apk: https://disk.yandex.ru/d/mTCo5gehaqex3A
 
 ## Скрины из приложения
 ![1](https://downloader.disk.yandex.ru/preview/9e1a975c69f8c5c449ad581b13e6785658b8eb9094b198921480b4df584200a0/648b98df/qusGiosQuCmqWv9N_SP0hk6XaktfWWdvtf_JwZhIBT4ATAYSw9MxVAvFsFTLXKBPGKlapmnA0ZcSL80grEVp8Q%3D%3D?uid=0&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)

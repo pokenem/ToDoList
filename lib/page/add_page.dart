@@ -70,7 +70,7 @@ class _AddPageState extends State<AddPage> {
       tasks[index!].date = null;
     }
     changeTileNetwork(tasks[index!]);
-    changeTilePersistence(tasks[index!], index!);
+    changeTilePersistence(tasks[index!]);
   }
 
   addTask() {

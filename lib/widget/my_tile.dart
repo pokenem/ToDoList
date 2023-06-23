@@ -41,7 +41,7 @@ class CustomTileState extends State<CustomTile> {
   onConfirmDismissTile() {
     tasks[index].isDone = !tasks[index].isDone!;
     changeTileNetwork(tasks[index]);
-    changeTilePersistence(tasks[index], index);
+    changeTilePersistence(tasks[index]);
     widget.updateParent();
   }
 
@@ -71,7 +71,7 @@ class CustomTileState extends State<CustomTile> {
     logger.i('Pressed checkbox and element with index $index changed his state');
     tasks[index].isDone = value;
     changeTileNetwork(tasks[index]);
-    changeTilePersistence(tasks[index], index);
+    changeTilePersistence(tasks[index]);
     widget.updateParent();
   }
 

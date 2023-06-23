@@ -11,8 +11,8 @@ addNewTilePersistence(TileData tile) {
   persistenceManager.postDataPersistence(tile.toMapPersistence());
 }
 
-changeTilePersistence(TileData tile, int index) {
-  persistenceManager.putDataPersistence(tile.toMapPersistence(), index);
+changeTilePersistence(TileData tile) {
+  persistenceManager.putDataPersistence(tile.toMapPersistence());
 }
 
 deleteTilePersistence(TileData tile) {
