@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tdlist/network/network_methods.dart';
-import 'package:tdlist/persistence/persistence_methods.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tdlist/page/presentation/todo_app.dart';
 
-import '../localization/s.dart';
-import '../theme/app_color.dart';
+import '../../localization/s.dart';
+import '../../main.dart';
+import '../../theme/app_color.dart';
 import '../data/tile_data.dart';
 import 'home_page.dart';
 import '../data/my_list.dart';
-import '../navigate/navigation.dart';
+import '../../navigate/navigation.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key, required this.index});
@@ -29,6 +30,8 @@ class _AddPageState extends State<AddPage> {
   String? note;
   bool? delEnable;
   int? index;
+  late BuildContext _context;
+  bool isInitialized = false;
 
   @override
   void dispose() {
@@ -39,6 +42,10 @@ class _AddPageState extends State<AddPage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  void loadTask() {
+    final tasks = TodoApp.of(context).tasks;
     index = widget.index;
     note = _controller!.text;
     if (index == tasks.length) {
@@ -57,36 +64,38 @@ class _AddPageState extends State<AddPage> {
     if (note != '') {
       isSave = true;
     }
+    isInitialized = true;
   }
 
   changeTask() {
-    tasks[index!].changedAt = DateTime.now();
+    final tasks = TodoApp.of(context).tasks;
     tasks[index!].note = note;
-
     tasks[index!].relevance = editRelevance;
     if (light!) {
       tasks[index!].date = date;
     } else {
       tasks[index!].date = null;
     }
-    changeTileNetwork(tasks[index!]);
-    changeTilePersistence(tasks[index!]);
+    TodoApp.of(context).changeItem(
+      index!,
+      tasks[index!],
+    );
   }
 
   addTask() {
-    tasks.add(TileData(
-      note: note,
-      relevance: editRelevance,
-      date: date,
-      isDone: false,
-      id: nextID(),
-      changedAt: DateTime.now(),
-      createdAt: DateTime.now(),
-      color: "#FFFFFF",
-      lastUpdatedBy: "1",
-    ));
-    addNewTileNetwork(tasks[index!]);
-    addNewTilePersistence(tasks[index!]);
+    TodoApp.of(context).addItem(
+      TileData(
+        note: note,
+        relevance: editRelevance,
+        date: date,
+        isDone: false,
+        id: nextID(),
+        changedAt: DateTime.now(),
+        createdAt: DateTime.now(),
+        color: "#FFFFFF",
+        lastUpdatedBy: "1",
+      ),
+    );
   }
 
   onChangedTextField() {
@@ -109,15 +118,16 @@ class _AddPageState extends State<AddPage> {
 
   onTapDeleteButton() {
     logger.i('Pressed tile ${S.of(context).get('delete')} in AddPage');
-    delTileNetwork(tasks[index!].id);
-    deleteTilePersistence(tasks[index!]);
-    tasks.removeAt(index!);
+    TodoApp.of(context).deleteItem(index!);
     NavigationManager.instance.pop();
   }
 
   @override
   Widget build(BuildContext context) {
     List<String> relevance = [S.of(context).get('no'), S.of(context).get('low'), '‼ ${S.of(context).get('high')}'];
+    if (!isInitialized) {
+      loadTask();
+    }
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: CustomScrollView(

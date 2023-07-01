@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tdlist/page/add_page.dart';
+import 'package:tdlist/page/presentation/add_page.dart';
 
-import '../page/home_page.dart';
+import '../page/presentation/home_page.dart';
 
 abstract class RouteNames {
   const RouteNames._();

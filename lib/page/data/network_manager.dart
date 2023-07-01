@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:tdlist/token.dart';
 
+import '../presentation/home_page.dart';
+
 class NetworkManager {
   static const _url = "https://beta.mrdekk.ru/todobackend/list";
 
@@ -24,7 +26,7 @@ class NetworkManager {
         _revision = jsonResponse['revision'];
       } else {}
     } catch (e) {
-      rethrow;
+      logger.w(e);
     }
     return data;
   }
@@ -40,7 +42,7 @@ class NetworkManager {
       if (response.statusCode == 200) {
       } else {}
     } catch (e) {
-      rethrow;
+      logger.w(e);
     }
   }
 
@@ -56,7 +58,7 @@ class NetworkManager {
       if (response.statusCode == 200) {
       } else {}
     } catch (e) {
-      rethrow;
+      logger.w(e);
     }
   }
 
@@ -70,7 +72,7 @@ class NetworkManager {
       if (response.statusCode == 200) {
       } else {}
     } catch (e) {
-      rethrow;
+      logger.w(e);
     }
   }
 
@@ -86,7 +88,7 @@ class NetworkManager {
         _revision = jsonResponse['revision'];
       } else {}
     } catch (e) {
-      rethrow;
+      logger.w(e);
     }
   }
 }

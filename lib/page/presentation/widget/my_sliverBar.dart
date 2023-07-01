@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../localization/s.dart';
-import '../theme/app_color.dart';
-import '../page/home_page.dart';
-import '../data/my_list.dart';
+import '../../../localization/s.dart';
+import '../../../theme/app_color.dart';
+import '../home_page.dart';
+import '../../data/my_list.dart';
+import '../todo_app.dart';
 
 class MySliverAppBar extends StatelessWidget {
   final bool isVis;
@@ -84,7 +85,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
               child: Opacity(
                 opacity: (1 - (shrinkOffset / 26)).clamp(0, 1),
                 child: Text(
-                  '${S.of(context).get('done')} — ${howMuch()}',
+                  '${S.of(context).get('done')} — ${howMuch(context)}',
                   style: const TextStyle(
                     fontSize: 16,
                     height: 1.25,
@@ -138,10 +139,10 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 }
 
-int howMuch() {
+int howMuch(BuildContext context) {
   int kol = 0;
-  for (int i = 0; i < tasks.length; i++) {
-    if (tasks[i].isDone!) kol++;
+  for (int i = 0; i < TodoApp.of(context).tasks.length; i++) {
+    if (TodoApp.of(context).tasks[i].isDone!) kol++;
   }
   return kol;
 }

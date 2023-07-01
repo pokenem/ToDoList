@@ -1,12 +1,6 @@
 import 'package:path_provider/path_provider.dart';
-import 'package:tdlist/network/network_methods.dart';
-import 'package:tdlist/page/home_page.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
-
-import '../network/network_manager.dart';
-
-var networkManager = NetworkManager();
 
 class PersistenceManager {
   Future<Database> _openDatabase() async {
@@ -21,12 +15,7 @@ class PersistenceManager {
     return Future.value(store);
   }
 
-  Future<List<dynamic>> getDataPersistence() async {
-    try {
-      await networkManager.getData();
-    } catch (e) {
-      logger.w('Failed to fetch data from network: $e');
-    }
+  Future<List<Map<String,dynamic>>> getDataPersistence() async {
 
     final database = await _openDatabase();
     final store = await _getStoreRef(database);
@@ -37,7 +26,7 @@ class PersistenceManager {
       dataPersistence.add(record.value);
     }
 
-    changeListNetwork(dataPersistence);
+
     await database.close();
 
     return dataPersistence;
@@ -70,7 +59,7 @@ class PersistenceManager {
     final database = await _openDatabase();
     final store = await _getStoreRef(database);
 
-    await store.delete(database); // Clear existing data
+    await store.delete(database);
 
     for (var item in list) {
       await store.record(item['id']).add(database, item.toMapPersistence());

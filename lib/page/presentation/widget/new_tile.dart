@@ -1,42 +1,25 @@
 import 'package:flutter/material.dart';
 
-import '../data/my_list.dart';
-import '../localization/s.dart';
-import '../navigate/navigation.dart';
-import '../page/home_page.dart';
+import '../../../localization/s.dart';
+import '../../../navigate/navigation.dart';
+import '../home_page.dart';
+import '../todo_app.dart';
 
-class NewTile extends StatefulWidget {
+class NewTile extends StatelessWidget {
   final int index;
   final bool isVis;
-  final Function() updateParent;
 
   const NewTile({
     super.key,
     required this.index,
     required this.isVis,
-    required this.updateParent,
   });
-
-  @override
-  NewTileState createState() => NewTileState();
-}
-
-class NewTileState extends State<NewTile> {
-  dynamic currentIndex;
-
-  onTapNewTile() {
-    logger.i('Pressed tile ${S.of(context).get('new')} in MyHomePage');
-    currentIndex = widget.index;
-    NavigationManager.instance.openAdd(currentIndex).then((_) {
-      widget.updateParent();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       titleTextStyle: Theme.of(context).textTheme.labelSmall,
-      shape: whatTheFirst() == tasks.length
+      shape: _whatTheFirst(context) == TodoApp.of(context).tasks.length
           ? RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             )
@@ -47,7 +30,7 @@ class NewTileState extends State<NewTile> {
             ),
       tileColor: Theme.of(context).colorScheme.onPrimary,
       onTap: () {
-        onTapNewTile();
+        _onTapNewTile();
       },
       title: Padding(
         padding: const EdgeInsets.only(
@@ -60,10 +43,15 @@ class NewTileState extends State<NewTile> {
     );
   }
 
-  int whatTheFirst() {
+  void _onTapNewTile() {
+    logger.i('Pressed tile New in MyHomePage');
+    NavigationManager.instance.openAdd(index);
+  }
+
+  int _whatTheFirst(BuildContext context) {
     int k = 0;
-    if (!widget.isVis) {
-      while (k < tasks.length && tasks[k].isDone!) {
+    if (!isVis) {
+      while (k < TodoApp.of(context).tasks.length && TodoApp.of(context).tasks[k].isDone!) {
         k++;
       }
     }

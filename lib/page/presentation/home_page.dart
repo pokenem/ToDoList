@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:tdlist/page/presentation/todo_app.dart';
 
-import '../theme/app_color.dart';
-import '../widget/my_sliverBar.dart';
-import '../widget/my_tile.dart';
+import '../../theme/app_color.dart';
+import '../data/repository.dart';
+import '../data/tile_data.dart';
+import 'widget/my_sliverBar.dart';
+import 'widget/my_tile.dart';
 import '../data/my_list.dart';
-import '../navigate/navigation.dart';
+import '../../navigate/navigation.dart';
 import 'package:logger/logger.dart';
 
-import '../widget/new_tile.dart';
+import 'widget/new_tile.dart';
 
 var logger = Logger();
 
@@ -32,13 +35,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   onPressedFloatingActionButton() {
     logger.i('Pressed FloatingActionButton in MyHomePage');
-    NavigationManager.instance.openAdd(tasks.length).then((_) {
+    NavigationManager.instance.openAdd(TodoApp.of(context).tasks.length).then((_) {
       setState(() {});
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
+    final tasks = TodoApp.of(context).tasks;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
@@ -82,9 +87,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       return NewTile(
                         index: index,
                         isVis: isVis,
-                        updateParent: () {
-                          setState(() {});
-                        },
                       );
                     }
                   } else if (index != tasks.length) {
@@ -99,9 +101,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     return NewTile(
                       index: index,
                       isVis: isVis,
-                      updateParent: () {
-                        setState(() {});
-                      },
                     );
                   }
                 },

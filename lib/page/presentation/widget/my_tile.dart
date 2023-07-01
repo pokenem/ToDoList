@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../network/network_methods.dart';
-import '../persistence/persistence_methods.dart';
-import '../theme/app_color.dart';
-import '../page/home_page.dart';
-import '../data/my_list.dart';
-import '../navigate/navigation.dart';
+import '../../../theme/app_color.dart';
+import '../home_page.dart';
+import '../../../navigate/navigation.dart';
+import '../todo_app.dart';
 
 class CustomTile extends StatefulWidget {
   final int index;
@@ -39,18 +36,17 @@ class CustomTileState extends State<CustomTile> {
   }
 
   onConfirmDismissTile() {
+    final tasks = TodoApp.of(context).tasks;
     tasks[index].isDone = !tasks[index].isDone!;
-    changeTileNetwork(tasks[index]);
-    changeTilePersistence(tasks[index]);
-    widget.updateParent();
+    TodoApp.of(context).changeItem(
+      index,
+      tasks[index],
+    );
   }
 
   onDismissedTile() {
     logger.i('Tile swiped left and element with index $index deleted from list');
-    delTileNetwork(tasks[index].id);
-    deleteTilePersistence(tasks[index]);
-    tasks.removeAt(index);
-    widget.updateParent();
+    TodoApp.of(context).deleteItem(index);
   }
 
   onUpdateTile(dynamic details) {
@@ -68,15 +64,18 @@ class CustomTileState extends State<CustomTile> {
   }
 
   onChangedCheckBox(bool value) {
-    logger.i('Pressed checkbox and element with index $index changed his state');
+    final tasks = TodoApp.of(context).tasks;
     tasks[index].isDone = value;
-    changeTileNetwork(tasks[index]);
-    changeTilePersistence(tasks[index]);
-    widget.updateParent();
+    logger.i('Pressed checkbox and element with index $index changed his state');
+    TodoApp.of(context).changeItem(
+      index,
+      tasks[index],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final tasks = TodoApp.of(context).tasks;
     return ClipRRect(
       child: Dismissible(
         key: Key(tasks[index].id.toString()),
@@ -237,7 +236,7 @@ class CustomTileState extends State<CustomTile> {
   int whatTheFirst() {
     int k = 0;
     if (!widget.isVis) {
-      while (k < tasks.length && tasks[k].isDone!) {
+      while (k < TodoApp.of(context).tasks.length && TodoApp.of(context).tasks[k].isDone!) {
         k++;
       }
     }
