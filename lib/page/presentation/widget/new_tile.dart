@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../localization/s.dart';
 import '../../../navigate/navigation.dart';
 import '../home_page.dart';
 import '../todo_app.dart';
+import '../todo_bloc.dart';
 
 class NewTile extends StatelessWidget {
   final int index;
@@ -19,7 +21,7 @@ class NewTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       titleTextStyle: Theme.of(context).textTheme.labelSmall,
-      shape: _whatTheFirst(context) == TodoApp.of(context).tasks.length
+      shape: _whatTheFirst(context) == context.read<TodoBloc>().state.length
           ? RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             )
@@ -51,7 +53,7 @@ class NewTile extends StatelessWidget {
   int _whatTheFirst(BuildContext context) {
     int k = 0;
     if (!isVis) {
-      while (k < TodoApp.of(context).tasks.length && TodoApp.of(context).tasks[k].isDone!) {
+      while (k < context.read<TodoBloc>().state.length && context.read<TodoBloc>().state[k].isDone!) {
         k++;
       }
     }

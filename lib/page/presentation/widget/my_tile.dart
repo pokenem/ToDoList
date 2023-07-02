@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../theme/app_color.dart';
 import '../home_page.dart';
 import '../../../navigate/navigation.dart';
 import '../todo_app.dart';
+import '../todo_bloc.dart';
 
 class CustomTile extends StatefulWidget {
   final int index;
@@ -36,17 +38,17 @@ class CustomTileState extends State<CustomTile> {
   }
 
   onConfirmDismissTile() {
-    final tasks = TodoApp.of(context).tasks;
+    final tasks = context.read<TodoBloc>().state;
     tasks[index].isDone = !tasks[index].isDone!;
-    TodoApp.of(context).changeItem(
+    context.read<TodoBloc>().add(TodoChangeEvent(
       index,
       tasks[index],
-    );
+    ));
   }
 
   onDismissedTile() {
     logger.i('Tile swiped left and element with index $index deleted from list');
-    TodoApp.of(context).deleteItem(index);
+    context.read<TodoBloc>().add(TodoDeleteEvent(index));
   }
 
   onUpdateTile(dynamic details) {
@@ -64,18 +66,18 @@ class CustomTileState extends State<CustomTile> {
   }
 
   onChangedCheckBox(bool value) {
-    final tasks = TodoApp.of(context).tasks;
+    final tasks = context.read<TodoBloc>().state;
     tasks[index].isDone = value;
     logger.i('Pressed checkbox and element with index $index changed his state');
-    TodoApp.of(context).changeItem(
+    context.read<TodoBloc>().add(TodoChangeEvent(
       index,
       tasks[index],
-    );
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
-    final tasks = TodoApp.of(context).tasks;
+    final tasks = context.read<TodoBloc>().state;
     return ClipRRect(
       child: Dismissible(
         key: Key(tasks[index].id.toString()),
@@ -236,7 +238,7 @@ class CustomTileState extends State<CustomTile> {
   int whatTheFirst() {
     int k = 0;
     if (!widget.isVis) {
-      while (k < TodoApp.of(context).tasks.length && TodoApp.of(context).tasks[k].isDone!) {
+      while (k < context.read<TodoBloc>().state.length && context.read<TodoBloc>().state[k].isDone!) {
         k++;
       }
     }

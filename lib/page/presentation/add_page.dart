@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tdlist/page/presentation/todo_app.dart';
+import 'package:tdlist/page/presentation/todo_bloc.dart';
 
 import '../../localization/s.dart';
 import '../../main.dart';
@@ -30,7 +31,6 @@ class _AddPageState extends State<AddPage> {
   String? note;
   bool? delEnable;
   int? index;
-  late BuildContext _context;
   bool isInitialized = false;
 
   @override
@@ -45,7 +45,7 @@ class _AddPageState extends State<AddPage> {
   }
 
   void loadTask() {
-    final tasks = TodoApp.of(context).tasks;
+    final tasks = context.read<TodoBloc>().state;
     index = widget.index;
     note = _controller!.text;
     if (index == tasks.length) {
@@ -68,7 +68,7 @@ class _AddPageState extends State<AddPage> {
   }
 
   changeTask() {
-    final tasks = TodoApp.of(context).tasks;
+    final tasks = context.read<TodoBloc>().state;
     tasks[index!].note = note;
     tasks[index!].relevance = editRelevance;
     if (light!) {
@@ -76,14 +76,14 @@ class _AddPageState extends State<AddPage> {
     } else {
       tasks[index!].date = null;
     }
-    TodoApp.of(context).changeItem(
+    context.read<TodoBloc>().add(TodoChangeEvent(
       index!,
       tasks[index!],
-    );
+    ));
   }
 
   addTask() {
-    TodoApp.of(context).addItem(
+    context.read<TodoBloc>().add(TodoAddEvent(
       TileData(
         note: note,
         relevance: editRelevance,
@@ -95,7 +95,7 @@ class _AddPageState extends State<AddPage> {
         color: "#FFFFFF",
         lastUpdatedBy: "1",
       ),
-    );
+    ));
   }
 
   onChangedTextField() {
@@ -118,7 +118,7 @@ class _AddPageState extends State<AddPage> {
 
   onTapDeleteButton() {
     logger.i('Pressed tile ${S.of(context).get('delete')} in AddPage');
-    TodoApp.of(context).deleteItem(index!);
+    context.read<TodoBloc>().add(TodoDeleteEvent(index!));
     NavigationManager.instance.pop();
   }
 

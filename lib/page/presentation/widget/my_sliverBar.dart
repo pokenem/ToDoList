@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tdlist/page/presentation/todo_bloc.dart';
 import '../../../localization/s.dart';
 import '../../../theme/app_color.dart';
 import '../home_page.dart';
@@ -42,6 +44,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
+    int kol = howMuch(context);
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primary,
@@ -141,8 +144,8 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
 int howMuch(BuildContext context) {
   int kol = 0;
-  for (int i = 0; i < TodoApp.of(context).tasks.length; i++) {
-    if (TodoApp.of(context).tasks[i].isDone!) kol++;
+  for (int i = 0; i < context.read<TodoBloc>().state.length; i++) {
+    if (context.read<TodoBloc>().state[i].isDone!) kol++;
   }
   return kol;
 }
