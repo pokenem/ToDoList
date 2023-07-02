@@ -9,13 +9,11 @@ import '../todo_bloc.dart';
 class CustomTile extends StatefulWidget {
   final int index;
   final bool isVis;
-  final Function() updateParent;
 
   const CustomTile({
     super.key,
     required this.index,
     required this.isVis,
-    required this.updateParent,
   });
 
   @override
@@ -60,9 +58,7 @@ class CustomTileState extends State<CustomTile> {
   onTapListTile() {
     currentIndex = index;
     logger.i('Pressed on tile in MyHomePage');
-    NavigationManager.instance.openAdd(currentIndex).then((_) {
-      widget.updateParent();
-    });
+    NavigationManager.instance.openAdd(currentIndex);
   }
 
   onChangedCheckBox(bool value) {

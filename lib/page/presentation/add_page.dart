@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tdlist/page/presentation/todo_app.dart';
 import 'package:tdlist/page/presentation/todo_bloc.dart';
 
 import '../../localization/s.dart';
-import '../../main.dart';
 import '../../theme/app_color.dart';
 import '../data/tile_data.dart';
 import 'home_page.dart';

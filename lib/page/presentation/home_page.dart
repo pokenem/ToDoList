@@ -37,82 +37,81 @@ class _MyHomePageState extends State<MyHomePage> {
 
   onPressedFloatingActionButton() {
     logger.i('Pressed FloatingActionButton in MyHomePage');
-    NavigationManager.instance.openAdd(context.read<TodoBloc>().state.length).then((_) {
-      setState(() {});
-    });
+    NavigationManager.instance.openAdd(context.read<TodoBloc>().state.length);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TodoBloc, List<TileData>>(builder: (context, tasks) {
-
-      return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          shape: const CircleBorder(),
-          backgroundColor: AppColor.clBlue,
-          child: const Icon(
-            Icons.add,
-            color: AppColor.clWhite,
-          ),
-          onPressed: () {
-            onPressedFloatingActionButton();
-          },
-        ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        body: CustomScrollView(
-          slivers: [
-            MySliverAppBar(isVis: isVis, updateParent: (bool newValue) => updateIsVis(newValue)),
-            SliverPadding(
-              padding: const EdgeInsets.only(
-                left: 8,
-                right: 8,
-                top: 0,
-                bottom: 32,
-              ),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    if (!isVis) {
-                      if (index != tasks.length) {
-                        if (tasks[index].isDone!) {
-                          return const SizedBox.shrink();
-                        } else {
-                          return CustomTile(
-                            index: index,
-                            isVis: isVis,
-                            updateParent: () {
-                              setState(() {});
-                            },
-                          );
-                        }
-                      } else {
-                        return NewTile(
-                          index: index,
-                          isVis: isVis,
-                        );
-                      }
-                    } else if (index != tasks.length) {
-                      return CustomTile(
-                        index: index,
-                        isVis: isVis,
-                        updateParent: () {
-                          setState(() {});
-                        },
-                      );
-                    } else {
-                      return NewTile(
-                        index: index,
-                        isVis: isVis,
-                      );
-                    }
-                  },
-                  childCount: tasks.length + 1, //isVis ? tasks.length + 1 : tasks.length - kol + 1,
-                ),
-              ),
+    return BlocBuilder<TodoBloc, List<TileData>>(
+      builder: (context, tasks) {
+        return Scaffold(
+          floatingActionButton: FloatingActionButton(
+            shape: const CircleBorder(),
+            backgroundColor: AppColor.clBlue,
+            child: const Icon(
+              Icons.add,
+              color: AppColor.clWhite,
             ),
-          ],
-        ),
-      );
-    });
+            onPressed: () {
+              onPressedFloatingActionButton();
+            },
+          ),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          body: context.read<TodoBloc>().loading
+              ? CustomScrollView(
+                  slivers: [
+                    MySliverAppBar(isVis: isVis, updateParent: (bool newValue) => updateIsVis(newValue)),
+                    SliverPadding(
+                      padding: const EdgeInsets.only(
+                        left: 8,
+                        right: 8,
+                        top: 0,
+                        bottom: 32,
+                      ),
+                      sliver: SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            if (!isVis) {
+                              if (index != tasks.length) {
+                                if (tasks[index].isDone!) {
+                                  return const SizedBox.shrink();
+                                } else {
+                                  return CustomTile(
+                                    index: index,
+                                    isVis: isVis,
+                                  );
+                                }
+                              } else {
+                                return NewTile(
+                                  index: index,
+                                  isVis: isVis,
+                                );
+                              }
+                            } else if (index != tasks.length) {
+                              return CustomTile(
+                                index: index,
+                                isVis: isVis,
+                              );
+                            } else {
+                              return NewTile(
+                                index: index,
+                                isVis: isVis,
+                              );
+                            }
+                          },
+                          childCount: tasks.length + 1, //isVis ? tasks.length + 1 : tasks.length - kol + 1,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColor.clGrey,
+                  ),
+                ),
+        );
+      },
+    );
   }
 }

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../localization/s.dart';
 import '../../../navigate/navigation.dart';
 import '../home_page.dart';
-import '../todo_app.dart';
 import '../todo_bloc.dart';
 
 class NewTile extends StatelessWidget {

@@ -12,6 +12,7 @@ class TodoBloc extends Bloc<TodoEvent, List<TileData>> {
   }
 
   final repository = Repository();
+  bool loading = false;
 
   _onAdd(TodoAddEvent event, Emitter<List<TileData>> emit) {
     final state = List<TileData>.from(this.state);
@@ -25,26 +26,25 @@ class TodoBloc extends Bloc<TodoEvent, List<TileData>> {
     state[event.index] = event.tile;
     state[event.index].changedAt = DateTime.now();
     repository.changeTile(event.tile);
-    print(state);
-    print(this.state);
+
     emit(state);
   }
 
    _onLoad(TodoLoadEvent event, Emitter<List<TileData>> emit) async {
      final state = List<TileData>.from(this.state);
-     await repository.getData().then((list) {
-      for (var item in list) {
-        state.add(TileData.fromJson(item));
-      }
-    });
-
+     final list = await repository.getData();
+     for (var item in list) {
+       state.add(TileData.fromJson(item));
+     }
+    loading = true;
     emit(state);
   }
 
   _onDelete(TodoDeleteEvent event, Emitter<List<TileData>> emit) {
     final state = List<TileData>.from(this.state);
-    state.removeAt(event.index);
+
     repository.deleteTile(state[event.index]);
+    state.removeAt(event.index);
     emit(state);
   }
 }
