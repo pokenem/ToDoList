@@ -4,8 +4,6 @@ import 'package:tdlist/page/presentation/todo_bloc.dart';
 import '../../../localization/s.dart';
 import '../../../theme/app_color.dart';
 import '../home_page.dart';
-import '../../data/my_list.dart';
-import '../todo_app.dart';
 
 class MySliverAppBar extends StatelessWidget {
   final bool isVis;
@@ -44,7 +42,6 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    int kol = howMuch(context);
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primary,
