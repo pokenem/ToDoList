@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:tdlist/page/data/network_manager.dart';
 import 'package:tdlist/page/data/persistence_manager.dart';
 
-import 'my_list.dart';
 import 'tile_data.dart';
 import '../presentation/home_page.dart';
 

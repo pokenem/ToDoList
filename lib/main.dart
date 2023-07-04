@@ -9,8 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final _routerDelegate = MyRouterDelegate();
-  final _routeInformationParser = MyRouteInformationParser();
+  final routerDelegate = MyRouterDelegate();
+  final routeInformationParser = MyRouteInformationParser();
   runApp(
     BlocProvider<TodoBloc>(
       create: (context) => TodoBloc()..add(TodoLoadEvent()),
@@ -18,8 +18,8 @@ void main() async {
           localizationsDelegates: S.localizationsDelegates,
           supportedLocales: S.supportedLocales,
           theme: AppTheme.lightTheme,
-          routerDelegate: _routerDelegate,
-          routeInformationParser: _routeInformationParser,
+          routerDelegate: routerDelegate,
+          routeInformationParser: routeInformationParser,
         ),
       ),
     );

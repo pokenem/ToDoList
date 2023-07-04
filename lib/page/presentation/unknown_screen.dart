@@ -8,7 +8,7 @@ class UnknownScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Страница не найдена')),
+      appBar: AppBar(title: const Text('Page not found')),
       body: const Center(
         child: Text("404"),
       ),
