@@ -6,7 +6,6 @@ import '../../theme/app_color.dart';
 import '../data/tile_data.dart';
 import 'widget/my_sliverBar.dart';
 import 'widget/my_tile.dart';
-import '../../navigate/navigation.dart';
 import 'package:logger/logger.dart';
 
 import 'widget/new_tile.dart';
@@ -14,7 +13,8 @@ import 'widget/new_tile.dart';
 var logger = Logger();
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({super.key, required this.onItemTap});
+  final void Function(int index) onItemTap;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -34,7 +34,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   onPressedFloatingActionButton() {
     logger.i('Pressed FloatingActionButton in MyHomePage');
-    NavigationManager.instance.openAdd(context.read<TodoBloc>().state.length);
+    widget.onItemTap(context.read<TodoBloc>().state.length);
+   // NavigationManager.instance.openAdd(context.read<TodoBloc>().state.length);
   }
 
   @override
@@ -76,23 +77,27 @@ class _MyHomePageState extends State<MyHomePage> {
                                   return CustomTile(
                                     index: index,
                                     isVis: isVis,
+                                    onItemTap: widget.onItemTap,
                                   );
                                 }
                               } else {
                                 return NewTile(
                                   index: index,
                                   isVis: isVis,
+                                  onItemTap: widget.onItemTap,
                                 );
                               }
                             } else if (index != tasks.length) {
                               return CustomTile(
                                 index: index,
                                 isVis: isVis,
+                                onItemTap: widget.onItemTap,
                               );
                             } else {
                               return NewTile(
                                 index: index,
                                 isVis: isVis,
+                                onItemTap: widget.onItemTap,
                               );
                             }
                           },

@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../theme/app_color.dart';
 import '../home_page.dart';
-import '../../../navigate/navigation.dart';
 import '../todo_bloc.dart';
 
 class CustomTile extends StatefulWidget {
   final int index;
   final bool isVis;
+  final void Function(int index) onItemTap;
 
   const CustomTile({
     super.key,
     required this.index,
     required this.isVis,
+    required this.onItemTap,
   });
 
   @override
@@ -57,7 +58,8 @@ class CustomTileState extends State<CustomTile> {
   onTapListTile() {
     currentIndex = index;
     logger.i('Pressed on tile in MyHomePage');
-    NavigationManager.instance.openAdd(currentIndex);
+    widget.onItemTap(currentIndex);
+   // NavigationManager.instance.openAdd(currentIndex);
   }
 
   onChangedCheckBox(bool value) {

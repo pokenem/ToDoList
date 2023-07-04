@@ -7,12 +7,12 @@ import '../../theme/app_color.dart';
 import '../data/tile_data.dart';
 import 'home_page.dart';
 import '../data/my_list.dart';
-import '../../navigate/navigation.dart';
 
 class AddPage extends StatefulWidget {
-  const AddPage({super.key, required this.index});
+  const AddPage({super.key, required this.index, required this.backToHome});
 
   final int? index;
+  final void Function() backToHome;
 
   @override
   State<AddPage> createState() => _AddPageState();
@@ -117,7 +117,8 @@ class _AddPageState extends State<AddPage> {
   onTapDeleteButton() {
     logger.i('Pressed tile ${S.of(context).get('delete')} in AddPage');
     context.read<TodoBloc>().add(TodoDeleteEvent(index!));
-    NavigationManager.instance.pop();
+    widget.backToHome();
+   // NavigationManager.instance.pop();
   }
 
   @override
@@ -139,7 +140,8 @@ class _AddPageState extends State<AddPage> {
               color: Theme.of(context).colorScheme.secondary,
               onPressed: () {
                 logger.i('Pressed close button in AddPage');
-                NavigationManager.instance.pop();
+                widget.backToHome();
+               // NavigationManager.instance.pop();
               },
             ),
             actions: [
@@ -152,7 +154,8 @@ class _AddPageState extends State<AddPage> {
                         } else {
                           addTask();
                         }
-                        NavigationManager.instance.pop();
+                        widget.backToHome();
+                      //  NavigationManager.instance.pop();
                       }
                     : null,
                 child: Padding(

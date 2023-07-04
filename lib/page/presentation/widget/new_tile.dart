@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../localization/s.dart';
-import '../../../navigate/navigation.dart';
 import '../home_page.dart';
 import '../todo_bloc.dart';
 
 class NewTile extends StatelessWidget {
   final int index;
   final bool isVis;
+  final void Function(int index) onItemTap;
 
   const NewTile({
     super.key,
     required this.index,
     required this.isVis,
+    required this.onItemTap,
   });
 
   @override
@@ -46,7 +47,8 @@ class NewTile extends StatelessWidget {
 
   void _onTapNewTile() {
     logger.i('Pressed tile New in MyHomePage');
-    NavigationManager.instance.openAdd(index);
+    onItemTap(index);
+    //NavigationManager.instance.openAdd(index);
   }
 
   int _whatTheFirst(BuildContext context) {
