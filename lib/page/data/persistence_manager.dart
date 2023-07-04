@@ -10,13 +10,13 @@ class PersistenceManager {
     return database;
   }
 
-  Future<StoreRef<String, Map<String, dynamic>>> _getStoreRef(Database database) {
+  Future<StoreRef<String, Map<String, dynamic>>> _getStoreRef(
+      Database database) {
     final store = stringMapStoreFactory.store('data');
     return Future.value(store);
   }
 
-  Future<List<Map<String,dynamic>>> getDataPersistence() async {
-
+  Future<List<Map<String, dynamic>>> getDataPersistence() async {
     final database = await _openDatabase();
     final store = await _getStoreRef(database);
     final records = await store.find(database);
@@ -25,7 +25,6 @@ class PersistenceManager {
     for (var record in records) {
       dataPersistence.add(record.value);
     }
-
 
     await database.close();
 
@@ -51,7 +50,8 @@ class PersistenceManager {
   Future<void> deleteDataPersistence(Map<String, dynamic> tile) async {
     final database = await _openDatabase();
     final store = await _getStoreRef(database);
-    await store.delete(database, finder: Finder(filter: Filter.byKey(tile['id'])));
+    await store.delete(database,
+        finder: Finder(filter: Filter.byKey(tile['id'])));
     await database.close();
   }
 

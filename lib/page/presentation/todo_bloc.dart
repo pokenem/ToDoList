@@ -30,12 +30,12 @@ class TodoBloc extends Bloc<TodoEvent, List<TileData>> {
     emit(state);
   }
 
-   _onLoad(TodoLoadEvent event, Emitter<List<TileData>> emit) async {
-     final state = List<TileData>.from(this.state);
-     final list = await repository.getData();
-     for (var item in list) {
-       state.add(TileData.fromJson(item));
-     }
+  _onLoad(TodoLoadEvent event, Emitter<List<TileData>> emit) async {
+    final state = List<TileData>.from(this.state);
+    final list = await repository.getData();
+    for (var item in list) {
+      state.add(TileData.fromJson(item));
+    }
     loading = true;
     emit(state);
   }
@@ -62,10 +62,10 @@ class TodoChangeEvent extends TodoEvent {
 
   TodoChangeEvent(this.index, this.tile);
 }
-class TodoLoadEvent extends TodoEvent {
 
-}
-class TodoDeleteEvent extends TodoEvent{
+class TodoLoadEvent extends TodoEvent {}
+
+class TodoDeleteEvent extends TodoEvent {
   final int index;
 
   TodoDeleteEvent(this.index);

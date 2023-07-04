@@ -64,8 +64,12 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                left: 60 - (44 * shrinkOffset / 106) >= 16 ? 60 - (44 * shrinkOffset / 106) : 16,
-                bottom: 44 - (44 * shrinkOffset / 106) >= 16 ? 44 - (44 * shrinkOffset / 106) : 16,
+                left: 60 - (44 * shrinkOffset / 106) >= 16
+                    ? 60 - (44 * shrinkOffset / 106)
+                    : 16,
+                bottom: 44 - (44 * shrinkOffset / 106) >= 16
+                    ? 44 - (44 * shrinkOffset / 106)
+                    : 16,
               ),
               child: Text(
                 S.of(context).get('myTasks'),
@@ -80,7 +84,9 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
             Padding(
               padding: EdgeInsets.only(
                 bottom: 16,
-                left: 60 - (44 * shrinkOffset / 106) >= 16 ? 60 - (44 * shrinkOffset / 106) : 16,
+                left: 60 - (44 * shrinkOffset / 106) >= 16
+                    ? 60 - (44 * shrinkOffset / 106)
+                    : 16,
               ),
               child: Opacity(
                 opacity: (1 - (shrinkOffset / 26)).clamp(0, 1),

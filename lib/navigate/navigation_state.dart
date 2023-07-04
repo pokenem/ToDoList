@@ -1,5 +1,4 @@
-class NavigationState
-{
+class NavigationState {
   final bool? _unknown;
 
   int? selectedItemIndex;
@@ -15,8 +14,7 @@ class NavigationState
       : _unknown = false,
         selectedItemIndex = null;
 
-  NavigationState.item(this.selectedItemIndex, this.isNew)
-      : _unknown = false;
+  NavigationState.item(this.selectedItemIndex, this.isNew) : _unknown = false;
 
   NavigationState.unknown()
       : _unknown = true,

@@ -14,15 +14,13 @@ void main() async {
   runApp(
     BlocProvider<TodoBloc>(
       create: (context) => TodoBloc()..add(TodoLoadEvent()),
-      child:  MaterialApp.router(
-          localizationsDelegates: S.localizationsDelegates,
-          supportedLocales: S.supportedLocales,
-          theme: AppTheme.lightTheme,
-          routerDelegate: routerDelegate,
-          routeInformationParser: routeInformationParser,
-        ),
+      child: MaterialApp.router(
+        localizationsDelegates: S.localizationsDelegates,
+        supportedLocales: S.supportedLocales,
+        theme: AppTheme.lightTheme,
+        routerDelegate: routerDelegate,
+        routeInformationParser: routeInformationParser,
       ),
-    );
+    ),
+  );
 }
-
-

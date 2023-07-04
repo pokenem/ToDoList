@@ -20,21 +20,16 @@ class MyRouteInformationParser extends RouteInformationParser<NavigationState> {
 
     if (uri.pathSegments.length == 2) {
       final itemId = uri.pathSegments[1];
-        if(itemId == 'addNew')
-        {
-          return NavigationState.item(-1, true);
-
+      if (itemId == 'addNew') {
+        return NavigationState.item(-1, true);
+      } else {
+        int? index = int.tryParse(itemId);
+        if (index == null) {
+          return NavigationState.unknown();
+        } else {
+          return NavigationState.item(index, false);
         }
-        else {
-          int? index = int.tryParse(itemId);
-          if(index == null) {
-            return NavigationState.unknown();
-          }
-          else
-            {
-              return NavigationState.item(index, false);
-            }
-        }
+      }
     }
 
     if (uri.pathSegments.length == 1) {
@@ -46,7 +41,6 @@ class MyRouteInformationParser extends RouteInformationParser<NavigationState> {
 
   @override
   RouteInformation? restoreRouteInformation(NavigationState configuration) {
-
     if (configuration.isAddPage) {
       return RouteInformation(
           location: '/${Routes.item}/${configuration.selectedItemIndex}');

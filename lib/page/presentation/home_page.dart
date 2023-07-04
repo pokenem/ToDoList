@@ -34,8 +34,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   onPressedFloatingActionButton() {
     logger.i('Pressed FloatingActionButton in MyHomePage');
-    widget.onItemTap(context.read<TodoBloc>().state.length,true);
-   // NavigationManager.instance.openAdd(context.read<TodoBloc>().state.length);
+    widget.onItemTap(context.read<TodoBloc>().state.length, true);
+    // NavigationManager.instance.openAdd(context.read<TodoBloc>().state.length);
   }
 
   @override
@@ -58,7 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
           body: context.read<TodoBloc>().loading
               ? CustomScrollView(
                   slivers: [
-                    MySliverAppBar(isVis: isVis, updateParent: (bool newValue) => updateIsVis(newValue)),
+                    MySliverAppBar(
+                        isVis: isVis,
+                        updateParent: (bool newValue) => updateIsVis(newValue)),
                     SliverPadding(
                       padding: const EdgeInsets.only(
                         left: 8,
@@ -101,7 +103,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               );
                             }
                           },
-                          childCount: tasks.length + 1, //isVis ? tasks.length + 1 : tasks.length - kol + 1,
+                          childCount: tasks.length +
+                              1, //isVis ? tasks.length + 1 : tasks.length - kol + 1,
                         ),
                       ),
                     ),

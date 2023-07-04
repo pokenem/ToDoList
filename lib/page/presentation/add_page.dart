@@ -9,7 +9,11 @@ import 'home_page.dart';
 import '../data/my_list.dart';
 
 class AddPage extends StatefulWidget {
-  const AddPage({super.key, required this.index, required this.backToHome, required this.isNew});
+  const AddPage(
+      {super.key,
+      required this.index,
+      required this.backToHome,
+      required this.isNew});
 
   final int? index;
   final bool isNew;
@@ -41,16 +45,13 @@ class _AddPageState extends State<AddPage> {
   @override
   void initState() {
     super.initState();
-
   }
 
   void loadTask() {
     final tasks = context.read<TodoBloc>().state;
-    if(widget.isNew)
-      {
-        index = tasks.length;
-      }
-    else {
+    if (widget.isNew) {
+      index = tasks.length;
+    } else {
       index = widget.index;
     }
     note = _controller!.text;
@@ -58,7 +59,8 @@ class _AddPageState extends State<AddPage> {
       delEnable = false;
     } else {
       delEnable = true;
-      if (note != null) _controller = TextEditingController(text: note = tasks[index!].note);
+      if (note != null)
+        _controller = TextEditingController(text: note = tasks[index!].note);
       editRelevance = tasks[index!].relevance;
       if (tasks[index!].date != null) {
         date = tasks[index!].date;
@@ -83,25 +85,25 @@ class _AddPageState extends State<AddPage> {
       tasks[index!].date = null;
     }
     context.read<TodoBloc>().add(TodoChangeEvent(
-      index!,
-      tasks[index!],
-    ));
+          index!,
+          tasks[index!],
+        ));
   }
 
   addTask() {
     context.read<TodoBloc>().add(TodoAddEvent(
-      TileData(
-        note: note,
-        relevance: editRelevance,
-        date: date,
-        isDone: false,
-        id: nextID(),
-        changedAt: DateTime.now(),
-        createdAt: DateTime.now(),
-        color: "#FFFFFF",
-        lastUpdatedBy: "1",
-      ),
-    ));
+          TileData(
+            note: note,
+            relevance: editRelevance,
+            date: date,
+            isDone: false,
+            id: nextID(),
+            changedAt: DateTime.now(),
+            createdAt: DateTime.now(),
+            color: "#FFFFFF",
+            lastUpdatedBy: "1",
+          ),
+        ));
   }
 
   onChangedTextField() {
@@ -126,12 +128,16 @@ class _AddPageState extends State<AddPage> {
     logger.i('Pressed tile ${S.of(context).get('delete')} in AddPage');
     context.read<TodoBloc>().add(TodoDeleteEvent(index!));
     widget.backToHome();
-   // NavigationManager.instance.pop();
+    // NavigationManager.instance.pop();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<String> relevance = [S.of(context).get('no'), S.of(context).get('low'), '‼ ${S.of(context).get('high')}'];
+    List<String> relevance = [
+      S.of(context).get('no'),
+      S.of(context).get('low'),
+      '‼ ${S.of(context).get('high')}'
+    ];
     if (!isInitialized) {
       loadTask();
     }
@@ -149,21 +155,22 @@ class _AddPageState extends State<AddPage> {
               onPressed: () {
                 logger.i('Pressed close button in AddPage');
                 widget.backToHome();
-               // NavigationManager.instance.pop();
+                // NavigationManager.instance.pop();
               },
             ),
             actions: [
               TextButton(
                 onPressed: isSave!
                     ? () {
-                        logger.i('Pressed text button ${S.of(context).get('save')} in AddPage');
+                        logger.i(
+                            'Pressed text button ${S.of(context).get('save')} in AddPage');
                         if (delEnable!) {
                           changeTask();
                         } else {
                           addTask();
                         }
                         widget.backToHome();
-                      //  NavigationManager.instance.pop();
+                        //  NavigationManager.instance.pop();
                       }
                     : null,
                 child: Padding(
@@ -172,7 +179,9 @@ class _AddPageState extends State<AddPage> {
                   ),
                   child: Text(
                     S.of(context).get('save'),
-                    style: isSave! ? Theme.of(context).textTheme.displayMedium : Theme.of(context).textTheme.bodyLarge,
+                    style: isSave!
+                        ? Theme.of(context).textTheme.displayMedium
+                        : Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
               ),
@@ -256,13 +265,17 @@ class _AddPageState extends State<AddPage> {
                                 value: 2,
                                 child: Text(
                                   relevance[2],
-                                  style: Theme.of(context).textTheme.headlineSmall,
+                                  style:
+                                      Theme.of(context).textTheme.headlineSmall,
                                 ),
                               )
                             ],
                             selectedItemBuilder: (BuildContext context) {
                               return relevance.map<Widget>((String value) {
-                                return Text(value, style: Theme.of(context).textTheme.labelMedium);
+                                return Text(value,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium);
                               }).toList();
                             },
                             underline: Container(),
@@ -290,16 +303,19 @@ class _AddPageState extends State<AddPage> {
                           subtitle: light!
                               ? Text(
                                   '${date!.year}/${date!.month}/${date!.day}',
-                                  style: Theme.of(context).textTheme.displaySmall,
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
                                 )
                               : const SizedBox.shrink(),
                           value: light!,
                           onChanged: (bool? value) async {
-                            logger.i('Pressed switch in AddPage for tile with index $index');
+                            logger.i(
+                                'Pressed switch in AddPage for tile with index $index');
                             light = value;
                             if (value == true) {
                               DateTime? newDate = await showDatePicker(
-                                initialEntryMode: DatePickerEntryMode.calendarOnly,
+                                initialEntryMode:
+                                    DatePickerEntryMode.calendarOnly,
                                 context: context,
                                 initialDate: date ?? DateTime.now(),
                                 firstDate: DateTime(1900),
@@ -346,11 +362,14 @@ class _AddPageState extends State<AddPage> {
                     contentPadding: const EdgeInsets.all(0),
                     leading: Icon(
                       Icons.delete,
-                      color: delEnable! ? AppColor.clRed : AppColor.labelDisable,
+                      color:
+                          delEnable! ? AppColor.clRed : AppColor.labelDisable,
                     ),
                     title: Text(
                       S.of(context).get('delete'),
-                      style: delEnable! ? Theme.of(context).textTheme.headlineMedium : Theme.of(context).textTheme.displayLarge,
+                      style: delEnable!
+                          ? Theme.of(context).textTheme.headlineMedium
+                          : Theme.of(context).textTheme.displayLarge,
                     ),
                   ),
                 ),

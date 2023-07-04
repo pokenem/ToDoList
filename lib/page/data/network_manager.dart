@@ -35,7 +35,10 @@ class NetworkManager {
     try {
       final response = await http.post(
         Uri.parse(_url),
-        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision": "$_revision"},
+        headers: {
+          "Authorization": "Bearer $token",
+          "X-Last-Known-Revision": "$_revision"
+        },
         body: body,
       );
       _revision = jsonDecode(response.body)['revision'];
@@ -50,7 +53,10 @@ class NetworkManager {
     try {
       final response = await http.put(
         Uri.parse("$_url/$id"),
-        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision": "$_revision"},
+        headers: {
+          "Authorization": "Bearer $token",
+          "X-Last-Known-Revision": "$_revision"
+        },
         body: body,
       );
       _revision = jsonDecode(response.body)['revision'];
@@ -66,7 +72,10 @@ class NetworkManager {
     try {
       final response = await http.delete(
         Uri.parse("$_url/$id"),
-        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision": "$_revision"},
+        headers: {
+          "Authorization": "Bearer $token",
+          "X-Last-Known-Revision": "$_revision"
+        },
       );
       _revision = jsonDecode(response.body)["revision"];
       if (response.statusCode == 200) {
@@ -80,7 +89,10 @@ class NetworkManager {
     try {
       final response = await http.patch(
         Uri.parse(_url),
-        headers: {"Authorization": "Bearer $token", "X-Last-Known-Revision": "$_revision"},
+        headers: {
+          "Authorization": "Bearer $token",
+          "X-Last-Known-Revision": "$_revision"
+        },
         body: body,
       );
       if (response.statusCode == 200) {

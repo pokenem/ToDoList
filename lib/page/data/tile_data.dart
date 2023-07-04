@@ -34,7 +34,9 @@ class TileData {
     }
     return TileData(
       note: jsonData['text'],
-      date: jsonData['deadline'] == null ? null : DateTime.fromMillisecondsSinceEpoch(jsonData['deadline']),
+      date: jsonData['deadline'] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(jsonData['deadline']),
       id: jsonData['id'],
       isDone: jsonData['done'],
       changedAt: DateTime.fromMillisecondsSinceEpoch(jsonData['changed_at']),

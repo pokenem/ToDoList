@@ -7,7 +7,7 @@ import 'package:tdlist/page/data/persistence_manager.dart';
 import 'tile_data.dart';
 import '../presentation/home_page.dart';
 
-class Repository extends ChangeNotifier{
+class Repository extends ChangeNotifier {
   final networkManager = NetworkManager();
   final persistenceManager = PersistenceManager();
 

@@ -54,7 +54,8 @@ class NewTile extends StatelessWidget {
   int _whatTheFirst(BuildContext context) {
     int k = 0;
     if (!isVis) {
-      while (k < context.read<TodoBloc>().state.length && context.read<TodoBloc>().state[k].isDone!) {
+      while (k < context.read<TodoBloc>().state.length &&
+          context.read<TodoBloc>().state[k].isDone!) {
         k++;
       }
     }

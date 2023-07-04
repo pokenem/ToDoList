@@ -32,20 +32,23 @@ class CustomTileState extends State<CustomTile> {
   }
 
   double iconPadding() {
-    return shift * (MediaQuery.of(context).size.width - 16) - 40 >= 28 ? shift * (MediaQuery.of(context).size.width - 16) - 48 : 20;
+    return shift * (MediaQuery.of(context).size.width - 16) - 40 >= 28
+        ? shift * (MediaQuery.of(context).size.width - 16) - 48
+        : 20;
   }
 
   onConfirmDismissTile() {
     final tasks = context.read<TodoBloc>().state;
     tasks[index].isDone = !tasks[index].isDone!;
     context.read<TodoBloc>().add(TodoChangeEvent(
-      index,
-      tasks[index],
-    ));
+          index,
+          tasks[index],
+        ));
   }
 
   onDismissedTile() {
-    logger.i('Tile swiped left and element with index $index deleted from list');
+    logger
+        .i('Tile swiped left and element with index $index deleted from list');
     context.read<TodoBloc>().add(TodoDeleteEvent(index));
   }
 
@@ -59,17 +62,18 @@ class CustomTileState extends State<CustomTile> {
     currentIndex = index;
     logger.i('Pressed on tile in MyHomePage');
     widget.onItemTap(currentIndex, false);
-   // NavigationManager.instance.openAdd(currentIndex);
+    // NavigationManager.instance.openAdd(currentIndex);
   }
 
   onChangedCheckBox(bool value) {
     final tasks = context.read<TodoBloc>().state;
     tasks[index].isDone = value;
-    logger.i('Pressed checkbox and element with index $index changed his state');
+    logger
+        .i('Pressed checkbox and element with index $index changed his state');
     context.read<TodoBloc>().add(TodoChangeEvent(
-      index,
-      tasks[index],
-    ));
+          index,
+          tasks[index],
+        ));
   }
 
   @override
@@ -83,7 +87,8 @@ class CustomTileState extends State<CustomTile> {
           if (direction == DismissDirection.endToStart) {
             return true;
           } else {
-            logger.i('Tile swiped right and element with index $index changed his state');
+            logger.i(
+                'Tile swiped right and element with index $index changed his state');
             Future.delayed(const Duration(milliseconds: 250), () {
               onConfirmDismissTile();
             });
@@ -107,7 +112,9 @@ class CustomTileState extends State<CustomTile> {
           ),
           alignment: Alignment.centerLeft,
           padding: EdgeInsets.only(left: iconPadding()),
-          child: tasks[index].isDone! ? const Icon(Icons.close, color: AppColor.clWhite) : const Icon(Icons.check, color: AppColor.clWhite),
+          child: tasks[index].isDone!
+              ? const Icon(Icons.close, color: AppColor.clWhite)
+              : const Icon(Icons.check, color: AppColor.clWhite),
         ),
         secondaryBackground: Container(
           decoration: BoxDecoration(
@@ -168,7 +175,9 @@ class CustomTileState extends State<CustomTile> {
                         if (states.contains(MaterialState.selected)) {
                           return AppColor.clGreen;
                         } else {
-                          return tasks[index].relevance == 2 ? AppColor.clRed : Theme.of(context).colorScheme.tertiary;
+                          return tasks[index].relevance == 2
+                              ? AppColor.clRed
+                              : Theme.of(context).colorScheme.tertiary;
                         }
                       },
                     ),
@@ -195,12 +204,15 @@ class CustomTileState extends State<CustomTile> {
                         overflow: TextOverflow.ellipsis,
                         TextSpan(
                           children: <InlineSpan>[
-                            if (tasks[index].relevance == 2 && !tasks[index].isDone!)
+                            if (tasks[index].relevance == 2 &&
+                                !tasks[index].isDone!)
                               TextSpan(
                                 text: '!! ',
-                                style: Theme.of(context).textTheme.headlineLarge,
+                                style:
+                                    Theme.of(context).textTheme.headlineLarge,
                               ),
-                            if (tasks[index].relevance == 1 && !tasks[index].isDone!)
+                            if (tasks[index].relevance == 1 &&
+                                !tasks[index].isDone!)
                               const WidgetSpan(
                                 child: Icon(
                                   Icons.arrow_downward,
@@ -210,7 +222,9 @@ class CustomTileState extends State<CustomTile> {
                               ),
                             TextSpan(
                               text: tasks[index].note!,
-                              style: tasks[index].isDone! ? Theme.of(context).textTheme.bodySmall : Theme.of(context).textTheme.bodyMedium,
+                              style: tasks[index].isDone!
+                                  ? Theme.of(context).textTheme.bodySmall
+                                  : Theme.of(context).textTheme.bodyMedium,
                             )
                           ],
                         ),
@@ -235,7 +249,8 @@ class CustomTileState extends State<CustomTile> {
   int whatTheFirst() {
     int k = 0;
     if (!widget.isVis) {
-      while (k < context.read<TodoBloc>().state.length && context.read<TodoBloc>().state[k].isDone!) {
+      while (k < context.read<TodoBloc>().state.length &&
+          context.read<TodoBloc>().state[k].isDone!) {
         k++;
       }
     }

@@ -62,13 +62,12 @@ class MyRouterDelegate extends RouterDelegate<NavigationState>
   }
 
   void _showItemDetails(int index, bool isNew) {
-    state = NavigationState.item(index,isNew);
+    state = NavigationState.item(index, isNew);
     notifyListeners();
   }
 
-  void _backToHome(){
+  void _backToHome() {
     state = NavigationState.root();
     notifyListeners();
   }
-
 }
