@@ -7,7 +7,7 @@ import '../todo_bloc.dart';
 class CustomTile extends StatefulWidget {
   final int index;
   final bool isVis;
-  final void Function(int index) onItemTap;
+  final void Function(int index, bool isNew) onItemTap;
 
   const CustomTile({
     super.key,
@@ -58,7 +58,7 @@ class CustomTileState extends State<CustomTile> {
   onTapListTile() {
     currentIndex = index;
     logger.i('Pressed on tile in MyHomePage');
-    widget.onItemTap(currentIndex);
+    widget.onItemTap(currentIndex, false);
    // NavigationManager.instance.openAdd(currentIndex);
   }
 

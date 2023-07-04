@@ -20,12 +20,20 @@ class MyRouteInformationParser extends RouteInformationParser<NavigationState> {
 
     if (uri.pathSegments.length == 2) {
       final itemId = uri.pathSegments[1];
-        int? index = int.tryParse(itemId);
-        if(index == null) {
-          return NavigationState.unknown();
+        if(itemId == 'addNew')
+        {
+          return NavigationState.item(-1, true);
+
         }
         else {
-          return NavigationState.item(int.parse(itemId));
+          int? index = int.tryParse(itemId);
+          if(index == null) {
+            return NavigationState.unknown();
+          }
+          else
+            {
+              return NavigationState.item(index, false);
+            }
         }
     }
 

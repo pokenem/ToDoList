@@ -3,6 +3,7 @@ class NavigationState
   final bool? _unknown;
 
   int? selectedItemIndex;
+  bool? isNew;
 
   bool get isAddPage => selectedItemIndex != null;
 
@@ -14,7 +15,7 @@ class NavigationState
       : _unknown = false,
         selectedItemIndex = null;
 
-  NavigationState.item(this.selectedItemIndex)
+  NavigationState.item(this.selectedItemIndex, this.isNew)
       : _unknown = false;
 
   NavigationState.unknown()

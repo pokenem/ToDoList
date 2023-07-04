@@ -8,7 +8,7 @@ import '../todo_bloc.dart';
 class NewTile extends StatelessWidget {
   final int index;
   final bool isVis;
-  final void Function(int index) onItemTap;
+  final void Function(int index, bool isNew) onItemTap;
 
   const NewTile({
     super.key,
@@ -47,7 +47,7 @@ class NewTile extends StatelessWidget {
 
   void _onTapNewTile() {
     logger.i('Pressed tile New in MyHomePage');
-    onItemTap(index);
+    onItemTap(index, true);
     //NavigationManager.instance.openAdd(index);
   }
 

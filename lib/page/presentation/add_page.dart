@@ -9,9 +9,10 @@ import 'home_page.dart';
 import '../data/my_list.dart';
 
 class AddPage extends StatefulWidget {
-  const AddPage({super.key, required this.index, required this.backToHome});
+  const AddPage({super.key, required this.index, required this.backToHome, required this.isNew});
 
   final int? index;
+  final bool isNew;
   final void Function() backToHome;
 
   @override
@@ -40,11 +41,18 @@ class _AddPageState extends State<AddPage> {
   @override
   void initState() {
     super.initState();
+
   }
 
   void loadTask() {
     final tasks = context.read<TodoBloc>().state;
-    index = widget.index;
+    if(widget.isNew)
+      {
+        index = tasks.length;
+      }
+    else {
+      index = widget.index;
+    }
     note = _controller!.text;
     if (index == tasks.length) {
       delEnable = false;

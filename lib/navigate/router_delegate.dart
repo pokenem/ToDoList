@@ -34,6 +34,7 @@ class MyRouterDelegate extends RouterDelegate<NavigationState>
             child: AddPage(
               backToHome: _backToHome,
               index: state?.selectedItemIndex,
+              isNew: state!.isNew!,
             ),
           ),
         if (state?.isUnknown == true)
@@ -60,8 +61,8 @@ class MyRouterDelegate extends RouterDelegate<NavigationState>
     notifyListeners();
   }
 
-  void _showItemDetails(int index) {
-    state = NavigationState.item(index);
+  void _showItemDetails(int index, bool isNew) {
+    state = NavigationState.item(index,isNew);
     notifyListeners();
   }
 

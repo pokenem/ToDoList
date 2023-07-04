@@ -14,7 +14,7 @@ var logger = Logger();
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.onItemTap});
-  final void Function(int index) onItemTap;
+  final void Function(int index, bool isNew) onItemTap;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   onPressedFloatingActionButton() {
     logger.i('Pressed FloatingActionButton in MyHomePage');
-    widget.onItemTap(context.read<TodoBloc>().state.length);
+    widget.onItemTap(context.read<TodoBloc>().state.length,true);
    // NavigationManager.instance.openAdd(context.read<TodoBloc>().state.length);
   }
 
