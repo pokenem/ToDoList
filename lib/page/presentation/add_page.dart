@@ -59,8 +59,9 @@ class _AddPageState extends State<AddPage> {
       delEnable = false;
     } else {
       delEnable = true;
-      if (note != null)
+      if (note != null) {
         _controller = TextEditingController(text: note = tasks[index!].note);
+      }
       editRelevance = tasks[index!].relevance;
       if (tasks[index!].date != null) {
         date = tasks[index!].date;

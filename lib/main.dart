@@ -7,7 +7,7 @@ import 'theme/app_theme.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() async {
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final routerDelegate = MyRouterDelegate();
   final routeInformationParser = MyRouteInformationParser();

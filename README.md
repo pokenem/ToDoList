@@ -4,14 +4,23 @@
 
 ## Что сделано?
 
-Дз2, все сделано по критериям
->Добавлено было:
->1. При запуске приложения отсылаются данные из локального хранилища в бекенд, обновляя данные полученные в оффлайне.
->2. Для стейт-менеджмента использованы Stateful виджеты
+Дз3, сделано по критериям:
+1.Чистота кода и общая структура проекта(все).
+2.Получение и хранение данных(все).
+3.Architecture(все): 
+3.1. Работа с данными организована в отдельной сущности, репозитории: repository
+3.2 State-management: BlocBuilder.
+3.3 DI: BlocProvider.
+4.Testing(что-то есть, что-то работает)
+5.Deeplinks(все):
+5.1 Чтобы открыть диплинк(добавления нового дела), используйте комманду: 
+./adb.exe shell am start -a android.intent.action.VIEW -d "tdlist://tdlist.com/item/addNew"
+в папке C:\Users\User\AppData\Local\Android\Sdk\platform-tools.
+Также реализовал вращающийся кружок при загрузке данных.
 
 ## Ссылки
 
-Ссылка для скачивания apk: https://disk.yandex.ru/d/mTCo5gehaqex3A
+Ссылка для скачивания apk: https://disk.yandex.ru/d/OhoHVWLQKIisQg
 
 ## Скрины из приложения
 ![1](https://downloader.disk.yandex.ru/preview/9e1a975c69f8c5c449ad581b13e6785658b8eb9094b198921480b4df584200a0/648b98df/qusGiosQuCmqWv9N_SP0hk6XaktfWWdvtf_JwZhIBT4ATAYSw9MxVAvFsFTLXKBPGKlapmnA0ZcSL80grEVp8Q%3D%3D?uid=0&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
