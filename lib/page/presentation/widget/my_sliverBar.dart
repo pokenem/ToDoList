@@ -47,7 +47,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         color: Theme.of(context).colorScheme.primary,
         boxShadow: [
           if (shrinkOffset / 106 >= 1)
-            const BoxShadow(
+             const BoxShadow(
               color: AppColor.clGrey,
               spreadRadius: 3,
               blurRadius: 5.0,
@@ -77,7 +77,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                   fontSize: 32 - 12 * ((shrinkOffset / 106).clamp(0, 1)),
                   height: 1.6 - 0.4125 * ((shrinkOffset / 106).clamp(0, 1)),
                   fontWeight: FontWeight.w500,
-                  color: AppColor.labelPrimary,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ),
@@ -92,11 +92,11 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                 opacity: (1 - (shrinkOffset / 26)).clamp(0, 1),
                 child: Text(
                   '${S.of(context).get('done')} — ${howMuch(context)}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     height: 1.25,
                     fontWeight: FontWeight.w400,
-                    color: AppColor.labelTertiary,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                   ),
                 ),
               ),

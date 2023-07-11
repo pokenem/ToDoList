@@ -200,8 +200,8 @@ class _AddPageState extends State<AddPage> {
                   ),
                   child: PhysicalModel(
                     elevation: 4.0,
-                    color: Colors.transparent,
-                    shadowColor: Colors.grey.withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    shadowColor: Theme.of(context).colorScheme.onPrimary.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(10.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
@@ -284,10 +284,10 @@ class _AddPageState extends State<AddPage> {
                           ),
                         ),
                       ),
-                      const Divider(
+                      Divider(
                         height: 16,
                         thickness: 0.5,
-                        color: Colors.grey,
+                        color: Theme.of(context).colorScheme.tertiary,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
@@ -342,10 +342,10 @@ class _AddPageState extends State<AddPage> {
                     ],
                   ),
                 ),
-                const Divider(
+                Divider(
                   height: 0,
                   thickness: 0.5,
-                  color: Colors.grey,
+                  color: Theme.of(context).colorScheme.tertiary,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
@@ -364,7 +364,7 @@ class _AddPageState extends State<AddPage> {
                     leading: Icon(
                       Icons.delete,
                       color:
-                          delEnable! ? AppColor.clRed : AppColor.labelDisable,
+                          delEnable! ? AppColor.clRed : Theme.of(context).colorScheme.onSecondaryContainer,
                     ),
                     title: Text(
                       S.of(context).get('delete'),

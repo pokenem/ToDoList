@@ -18,6 +18,7 @@ main() async {
         localizationsDelegates: S.localizationsDelegates,
         supportedLocales: S.supportedLocales,
         theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
         routerDelegate: routerDelegate,
         routeInformationParser: routeInformationParser,
       ),

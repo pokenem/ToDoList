@@ -35,4 +35,35 @@ class AppTheme {
     ),
     // useMaterial3: true,
   );
+
+  static ThemeData darkTheme = ThemeData(
+    colorScheme: const ColorScheme.light(
+      primary: AppColor.darkBackPrimary,
+      onPrimary: AppColor.darkBackSecondary,
+      primaryContainer: AppColor.darkBackElevated,
+      secondary: AppColor.darkLabelPrimary,
+      onSecondary: AppColor.darkLabelSecondary,
+      secondaryContainer: AppColor.darkLabelTertiary,
+      onSecondaryContainer: AppColor.darkLabelDisable,
+      tertiary: AppColor.darkSupportSeparator,
+      onTertiary: AppColor.darkSupportOverlay,
+    ),
+    textTheme: const TextTheme(
+      titleLarge: AppStyle.darkTitleLarge,
+      titleMedium: AppStyle.darkTitleMedium,
+      titleSmall: AppStyle.darkTitleSmall,
+      labelLarge: AppStyle.darkLabelLarge,
+      bodyMedium: AppStyle.darkBodyMedium,
+      bodySmall: AppStyle.darkBodySmall,
+      labelMedium: AppStyle.darkLabelMedium,
+      labelSmall: AppStyle.darkLabelSmall,
+      displayMedium: AppStyle.darkDisplayMedium,
+      displaySmall: AppStyle.darkDisplaySmall,
+      headlineMedium: AppStyle.darkHeadlineMedium,
+      headlineSmall: AppStyle.darkHeadlineSmall,
+      headlineLarge: AppStyle.darkHeadlineLarge,
+      displayLarge: AppStyle.darkDisplayLarge,
+      bodyLarge: AppStyle.darkBodyLarge,
+    ), // useMaterial3: true,
+  );
 }
