@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tdlist/page/data/di.dart';
 import 'package:tdlist/page/presentation/todo_bloc.dart';
 import '../localization/s.dart';
 import 'navigate/route_information_parser.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Locator.init();
   final routerDelegate = MyRouterDelegate();
   final routeInformationParser = MyRouteInformationParser();
   runApp(

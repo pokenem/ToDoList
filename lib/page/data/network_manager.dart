@@ -27,6 +27,7 @@ class NetworkManager {
       } else {}
     } catch (e) {
       logger.w(e);
+      throw Exception(e);
     }
     return data;
   }
@@ -46,6 +47,7 @@ class NetworkManager {
       } else {}
     } catch (e) {
       logger.w(e);
+      throw Exception(e);
     }
   }
 
@@ -65,6 +67,7 @@ class NetworkManager {
       } else {}
     } catch (e) {
       logger.w(e);
+      throw Exception(e);
     }
   }
 
@@ -82,6 +85,7 @@ class NetworkManager {
       } else {}
     } catch (e) {
       logger.w(e);
+      throw Exception(e);
     }
   }
 
@@ -101,6 +105,7 @@ class NetworkManager {
       } else {}
     } catch (e) {
       logger.w(e);
+      throw Exception(e);
     }
   }
 }

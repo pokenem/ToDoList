@@ -16,10 +16,11 @@ class AppColor {
   static const Color clGrey = Color(0xFF8E8E93);
   static const Color clGreyLight = Color(0xFFD1D1D6);
   static const Color clWhite = Color(0xFFFFFFFF);
+  static const Color clRedRemoteConfig = Color(0xFF793CD8);
 
-  static const Color darkBackPrimary = Color(0x16161800);
-  static const Color darkBackSecondary = Color(0x25252800);
-  static const Color darkBackElevated = Color(0x3C3C3F00);
+  static const Color darkBackPrimary = Color(0xFF161618);
+  static const Color darkBackSecondary = Color(0xFF252528);
+  static const Color darkBackElevated = Color(0xFF3C3C3F);
   static const Color darkLabelPrimary = Color(0xFFFFFFFF);
   static const Color darkLabelSecondary = Color(0x99FFFFFF);
   static const Color darkLabelTertiary = Color(0x66FFFFFF);

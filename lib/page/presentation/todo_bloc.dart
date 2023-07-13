@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tdlist/page/data/repository.dart';
 
+import '../data/di.dart';
 import '../data/tile_data.dart';
 
 class TodoBloc extends Bloc<TodoEvent, List<TileData>> {
@@ -16,6 +17,10 @@ class TodoBloc extends Bloc<TodoEvent, List<TileData>> {
 
   _onAdd(TodoAddEvent event, Emitter<List<TileData>> emit) {
     final state = List<TileData>.from(this.state);
+    Locator.analytics.logEvent(
+      name: 'add_event',
+    );
+
     state.add(event.tile);
     repository.addNewTile(event.tile);
     emit(state);
@@ -23,6 +28,9 @@ class TodoBloc extends Bloc<TodoEvent, List<TileData>> {
 
   _onChange(TodoChangeEvent event, Emitter<List<TileData>> emit) {
     final state = List<TileData>.from(this.state);
+    Locator.analytics.logEvent(
+      name: 'change_event',
+    );
     state[event.index] = event.tile;
     state[event.index].changedAt = DateTime.now();
     repository.changeTile(event.tile);
@@ -42,7 +50,9 @@ class TodoBloc extends Bloc<TodoEvent, List<TileData>> {
 
   _onDelete(TodoDeleteEvent event, Emitter<List<TileData>> emit) {
     final state = List<TileData>.from(this.state);
-
+    Locator.analytics.logEvent(
+      name: 'delete_event',
+    );
     repository.deleteTile(state[event.index]);
     state.removeAt(event.index);
     emit(state);

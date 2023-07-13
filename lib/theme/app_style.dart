@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'app_color.dart';
 
 class AppStyle {
@@ -185,5 +184,17 @@ class AppStyle {
     height: 1.7142,
     fontWeight: FontWeight.w500,
     color: AppColor.darkLabelDisable,
+  );
+  static const TextStyle headlineLargeRemote = TextStyle(
+    fontSize: 16,
+    height: 1.25,
+    fontWeight: FontWeight.w800,
+    color: AppColor.clRedRemoteConfig,
+  );
+  static const TextStyle headlineSmallRemote = TextStyle(
+    fontSize: 16,
+    height: 1.25,
+    fontWeight: FontWeight.w400,
+    color: AppColor.clRedRemoteConfig,
   );
 }

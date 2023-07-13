@@ -4,6 +4,8 @@ import 'package:tdlist/page/presentation/todo_bloc.dart';
 
 import '../../localization/s.dart';
 import '../../theme/app_color.dart';
+import '../../theme/app_style.dart';
+import '../data/di.dart';
 import '../data/tile_data.dart';
 import 'home_page.dart';
 import '../data/my_list.dart';
@@ -134,6 +136,7 @@ class _AddPageState extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
+    final useImportanceColor = Locator.configRepository.useImportanceColor;
     List<String> relevance = [
       S.of(context).get('no'),
       S.of(context).get('low'),
@@ -242,6 +245,7 @@ class _AddPageState extends State<AddPage> {
                         subtitle: SizedBox(
                           height: 30,
                           child: DropdownButton<int>(
+                            dropdownColor: Theme.of(context).colorScheme.primaryContainer,
                             value: editRelevance,
                             iconSize: 0,
                             onChanged: (int? newValue) {
@@ -267,7 +271,7 @@ class _AddPageState extends State<AddPage> {
                                 child: Text(
                                   relevance[2],
                                   style:
-                                      Theme.of(context).textTheme.headlineSmall,
+                                      useImportanceColor ? AppStyle.headlineSmallRemote : Theme.of(context).textTheme.headlineSmall,
                                 ),
                               )
                             ],

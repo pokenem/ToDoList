@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../page/data/di.dart';
 import '../page/presentation/add_page.dart';
 import '../page/presentation/home_page.dart';
 import '../page/presentation/unknown_screen.dart';
@@ -46,7 +47,9 @@ class MyRouterDelegate extends RouterDelegate<NavigationState>
         if (!route.didPop(result)) {
           return false;
         }
-
+        Locator.analytics.logEvent(
+          name: 'pop_page_event',
+        );
         state = NavigationState.root();
 
         notifyListeners();
@@ -58,6 +61,13 @@ class MyRouterDelegate extends RouterDelegate<NavigationState>
   @override
   Future<void> setNewRoutePath(NavigationState configuration) async {
     state = configuration;
+    Locator.analytics.logEvent(
+      name: 'new_route_path_event',
+      parameters: {
+        'home': state!.isRoot.toString(),
+        'add_page': state!.isAddPage.toString(),
+      }
+    );
     notifyListeners();
   }
 

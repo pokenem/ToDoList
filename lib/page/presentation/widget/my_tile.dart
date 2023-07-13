@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../theme/app_color.dart';
+import '../../../theme/app_style.dart';
+import '../../data/di.dart';
 import '../home_page.dart';
 import '../todo_bloc.dart';
 
@@ -78,6 +80,7 @@ class CustomTileState extends State<CustomTile> {
 
   @override
   Widget build(BuildContext context) {
+    final useImportanceColor = Locator.configRepository.useImportanceColor;
     final tasks = context.read<TodoBloc>().state;
     return ClipRRect(
       child: Dismissible(
@@ -176,7 +179,7 @@ class CustomTileState extends State<CustomTile> {
                           return AppColor.clGreen;
                         } else {
                           return tasks[index].relevance == 2
-                              ? AppColor.clRed
+                              ? useImportanceColor ? AppColor.clRedRemoteConfig : AppColor.clRed
                               : Theme.of(context).colorScheme.tertiary;
                         }
                       },
@@ -209,7 +212,7 @@ class CustomTileState extends State<CustomTile> {
                               TextSpan(
                                 text: '!! ',
                                 style:
-                                    Theme.of(context).textTheme.headlineLarge,
+                                    useImportanceColor ? AppStyle.headlineLargeRemote : Theme.of(context).textTheme.headlineLarge,
                               ),
                             if (tasks[index].relevance == 1 &&
                                 !tasks[index].isDone!)
