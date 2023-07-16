@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -20,22 +21,22 @@ jobs:
         run: echo "$GOOGLE_SERVICES_JSON" > android/app/google-services.json
       - name: Decode firebase_option
         env:
-          firebase_options_dart: ${{ secrets.FIREBASE_OPTION }}
+          firebase_options_dart: ${{secrets.FIREBASE_OPTION}}
         run: echo "$firebase_options_dart" > lib/firebase_options.dart
 
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
       - name: Get dependencies
-        run: flutter pub get
+          run: flutter pub get
       - name: Check code format
-        run: dart format -o none --set-exit-if-changed .
+          run: dart format -o none --set-exit-if-changed .
       - name: Static analyzer
-        run: flutter analyze --fatal-infos .
+          run: flutter analyze --fatal-infos .
       - name: Run unit tests
-        run: flutter test test
+          run: flutter test test
       - name: Build release-apk
-        run: flutter build apk
+          run: flutter build apk
       - uses: actions/upload-artifact@v1
         with:
           name: release-apk
@@ -43,7 +44,7 @@ jobs:
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          appId: ${{ secrets.APPID }}
-          token: ${{ secrets.TOKEN }}
+          appId: ${{secrets.APPID}}
+          token: ${{secrets.TOKEN}}
           groups: pre-tester
           file: build/app/outputs/apk/release/app-release.apk
