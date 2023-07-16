@@ -9,7 +9,8 @@ part of 'tile_data.dart';
 _$_TileData _$$_TileDataFromJson(Map<String, dynamic> json) => _$_TileData(
       note: json['note'] as String,
       relevance: json['relevance'] as int,
-      date: DateTime.parse(json['date'] as String),
+      date:
+          json['date'] == null ? null : DateTime.parse(json['date'] as String),
       isDone: json['isDone'] as bool? ?? false,
       id: json['id'] as String,
       changedAt: DateTime.parse(json['changedAt'] as String),
@@ -22,7 +23,7 @@ Map<String, dynamic> _$$_TileDataToJson(_$_TileData instance) =>
     <String, dynamic>{
       'note': instance.note,
       'relevance': instance.relevance,
-      'date': instance.date.toIso8601String(),
+      'date': instance.date?.toIso8601String(),
       'isDone': instance.isDone,
       'id': instance.id,
       'changedAt': instance.changedAt.toIso8601String(),

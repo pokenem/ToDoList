@@ -8,7 +8,7 @@ class TileData with _$TileData{
   const factory TileData({
     required String note,
     required int relevance,
-    required DateTime date,
+    DateTime? date,
     @Default(false) bool isDone,
     required String id,
     required DateTime changedAt,

@@ -22,7 +22,7 @@ TileData _$TileDataFromJson(Map<String, dynamic> json) {
 mixin _$TileData {
   String get note => throw _privateConstructorUsedError;
   int get relevance => throw _privateConstructorUsedError;
-  DateTime get date => throw _privateConstructorUsedError;
+  DateTime? get date => throw _privateConstructorUsedError;
   bool get isDone => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   DateTime get changedAt => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $TileDataCopyWith<$Res> {
   $Res call(
       {String note,
       int relevance,
-      DateTime date,
+      DateTime? date,
       bool isDone,
       String id,
       DateTime changedAt,
@@ -68,7 +68,7 @@ class _$TileDataCopyWithImpl<$Res, $Val extends TileData>
   $Res call({
     Object? note = null,
     Object? relevance = null,
-    Object? date = null,
+    Object? date = freezed,
     Object? isDone = null,
     Object? id = null,
     Object? changedAt = null,
@@ -85,10 +85,10 @@ class _$TileDataCopyWithImpl<$Res, $Val extends TileData>
           ? _value.relevance
           : relevance // ignore: cast_nullable_to_non_nullable
               as int,
-      date: null == date
+      date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       isDone: null == isDone
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
@@ -127,7 +127,7 @@ abstract class _$$_TileDataCopyWith<$Res> implements $TileDataCopyWith<$Res> {
   $Res call(
       {String note,
       int relevance,
-      DateTime date,
+      DateTime? date,
       bool isDone,
       String id,
       DateTime changedAt,
@@ -149,7 +149,7 @@ class __$$_TileDataCopyWithImpl<$Res>
   $Res call({
     Object? note = null,
     Object? relevance = null,
-    Object? date = null,
+    Object? date = freezed,
     Object? isDone = null,
     Object? id = null,
     Object? changedAt = null,
@@ -166,10 +166,10 @@ class __$$_TileDataCopyWithImpl<$Res>
           ? _value.relevance
           : relevance // ignore: cast_nullable_to_non_nullable
               as int,
-      date: null == date
+      date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       isDone: null == isDone
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
@@ -204,7 +204,7 @@ class _$_TileData implements _TileData {
   const _$_TileData(
       {required this.note,
       required this.relevance,
-      required this.date,
+      this.date,
       this.isDone = false,
       required this.id,
       required this.changedAt,
@@ -220,7 +220,7 @@ class _$_TileData implements _TileData {
   @override
   final int relevance;
   @override
-  final DateTime date;
+  final DateTime? date;
   @override
   @JsonKey()
   final bool isDone;
@@ -284,7 +284,7 @@ abstract class _TileData implements TileData {
   const factory _TileData(
       {required final String note,
       required final int relevance,
-      required final DateTime date,
+      final DateTime? date,
       final bool isDone,
       required final String id,
       required final DateTime changedAt,
@@ -299,7 +299,7 @@ abstract class _TileData implements TileData {
   @override
   int get relevance;
   @override
-  DateTime get date;
+  DateTime? get date;
   @override
   bool get isDone;
   @override
