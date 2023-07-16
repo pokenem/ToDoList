@@ -19,22 +19,20 @@ abstract class Locator {
   static Future<void> init() async {
     try {
       await _initFirebase();
-    }
-    catch(e) {
+    } catch (e) {
       logger.d('No Internet connection to initialize firebase');
     }
-      _locator.registerLazySingleton<FirebaseRemoteConfig>(
-            () => FirebaseRemoteConfig.instance,
-      );
-      final configRepo = ConfigRepository(_locator<FirebaseRemoteConfig>());
-      try {
-        await configRepo.init();
-      }
-      catch(e){
-        logger.d(e);
-      }
-      _locator.registerSingleton<ConfigRepository>(configRepo);
-    try{
+    _locator.registerLazySingleton<FirebaseRemoteConfig>(
+      () => FirebaseRemoteConfig.instance,
+    );
+    final configRepo = ConfigRepository(_locator<FirebaseRemoteConfig>());
+    try {
+      await configRepo.init();
+    } catch (e) {
+      logger.d(e);
+    }
+    _locator.registerSingleton<ConfigRepository>(configRepo);
+    try {
       _initCrashlytics();
     } catch (e) {
       logger.d('No Internet connection to initialize Crashlytics');

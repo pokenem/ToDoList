@@ -61,13 +61,10 @@ class MyRouterDelegate extends RouterDelegate<NavigationState>
   @override
   Future<void> setNewRoutePath(NavigationState configuration) async {
     state = configuration;
-    Locator.analytics.logEvent(
-      name: 'new_route_path_event',
-      parameters: {
-        'home': state!.isRoot.toString(),
-        'add_page': state!.isAddPage.toString(),
-      }
-    );
+    Locator.analytics.logEvent(name: 'new_route_path_event', parameters: {
+      'home': state!.isRoot.toString(),
+      'add_page': state!.isAddPage.toString(),
+    });
     notifyListeners();
   }
 

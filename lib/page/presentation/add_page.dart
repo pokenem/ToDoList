@@ -204,7 +204,10 @@ class _AddPageState extends State<AddPage> {
                   child: PhysicalModel(
                     elevation: 4.0,
                     color: Theme.of(context).colorScheme.onPrimary,
-                    shadowColor: Theme.of(context).colorScheme.onPrimary.withOpacity(0.5),
+                    shadowColor: Theme.of(context)
+                        .colorScheme
+                        .onPrimary
+                        .withOpacity(0.5),
                     borderRadius: BorderRadius.circular(10.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
@@ -245,7 +248,8 @@ class _AddPageState extends State<AddPage> {
                         subtitle: SizedBox(
                           height: 30,
                           child: DropdownButton<int>(
-                            dropdownColor: Theme.of(context).colorScheme.primaryContainer,
+                            dropdownColor:
+                                Theme.of(context).colorScheme.primaryContainer,
                             value: editRelevance,
                             iconSize: 0,
                             onChanged: (int? newValue) {
@@ -270,8 +274,11 @@ class _AddPageState extends State<AddPage> {
                                 value: 2,
                                 child: Text(
                                   relevance[2],
-                                  style:
-                                      useImportanceColor ? AppStyle.headlineSmallRemote : Theme.of(context).textTheme.headlineSmall,
+                                  style: useImportanceColor
+                                      ? AppStyle.headlineSmallRemote
+                                      : Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall,
                                 ),
                               )
                             ],
@@ -367,8 +374,9 @@ class _AddPageState extends State<AddPage> {
                     contentPadding: const EdgeInsets.all(0),
                     leading: Icon(
                       Icons.delete,
-                      color:
-                          delEnable! ? AppColor.clRed : Theme.of(context).colorScheme.onSecondaryContainer,
+                      color: delEnable!
+                          ? AppColor.clRed
+                          : Theme.of(context).colorScheme.onSecondaryContainer,
                     ),
                     title: Text(
                       S.of(context).get('delete'),

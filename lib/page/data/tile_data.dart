@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class TileData{
+class TileData {
   String? note;
   int? relevance;
   DateTime? date;

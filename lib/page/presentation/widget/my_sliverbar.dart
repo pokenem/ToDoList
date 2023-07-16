@@ -47,7 +47,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         color: Theme.of(context).colorScheme.primary,
         boxShadow: [
           if (shrinkOffset / 106 >= 1)
-             const BoxShadow(
+            const BoxShadow(
               color: AppColor.clGrey,
               spreadRadius: 3,
               blurRadius: 5.0,

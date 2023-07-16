@@ -179,7 +179,9 @@ class CustomTileState extends State<CustomTile> {
                           return AppColor.clGreen;
                         } else {
                           return tasks[index].relevance == 2
-                              ? useImportanceColor ? AppColor.clRedRemoteConfig : AppColor.clRed
+                              ? useImportanceColor
+                                  ? AppColor.clRedRemoteConfig
+                                  : AppColor.clRed
                               : Theme.of(context).colorScheme.tertiary;
                         }
                       },
@@ -211,8 +213,9 @@ class CustomTileState extends State<CustomTile> {
                                 !tasks[index].isDone!)
                               TextSpan(
                                 text: '!! ',
-                                style:
-                                    useImportanceColor ? AppStyle.headlineLargeRemote : Theme.of(context).textTheme.headlineLarge,
+                                style: useImportanceColor
+                                    ? AppStyle.headlineLargeRemote
+                                    : Theme.of(context).textTheme.headlineLarge,
                               ),
                             if (tasks[index].relevance == 1 &&
                                 !tasks[index].isDone!)

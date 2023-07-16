@@ -1,14 +1,14 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 class ConfigRepository {
-  FirebaseRemoteConfig _remoteConfig;
+  final FirebaseRemoteConfig _remoteConfig;
 
   ConfigRepository(this._remoteConfig);
 
-  bool get useImportanceColor => _remoteConfig.getBool(_ConfigFields.importanceColor);
+  bool get useImportanceColor =>
+      _remoteConfig.getBool(_ConfigFields.importanceColor);
 
   Future<void> init() async {
-
     await FirebaseRemoteConfig.instance.setConfigSettings(
       RemoteConfigSettings(
         fetchTimeout: const Duration(minutes: 1),
