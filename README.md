@@ -4,19 +4,31 @@
 
 ## Что сделано?
 
-Дз3, сделано по критериям:
-1.Чистота кода и общая структура проекта(все).
-2.Получение и хранение данных(все).
-3.Architecture(все): 
-3.1. Работа с данными организована в отдельной сущности, репозитории: repository
-3.2 State-management: BlocBuilder.
-3.3 DI: BlocProvider.
-4.Testing(что-то есть, что-то работает)
-5.Deeplinks(все):
-5.1 Чтобы открыть диплинк(добавления нового дела), используйте комманду: 
-./adb.exe shell am start -a android.intent.action.VIEW -d "tdlist://tdlist.com/item/addNew"
-в папке C:\Users\User\AppData\Local\Android\Sdk\platform-tools.
-Также реализовал вращающийся кружок при загрузке данных.
+1. **Чистота кода и общая структура проекта**:
+    - Все сделано
+
+2. **Навигация, UI, animations**:
+    - Навигация инкапсулирована в отдельной сущности, отсутствуют явные переходы Navigator.push прямо в колбеках
+    - Текст длинных заметок обрезается по макету
+    - Поддержка ночной темы
+    - Реализована поддержка лендскейп-ориентации
+    - Реализована поддержка больших экранов (планшеты)
+
+4. **Firebase**:
+    - Реализована работа с Remote Configs
+    - Firebase Crashlytics
+
+5. **Build & Release**:
+    - Флейворы через пакет flutter_flavours
+    - Настроен CI на GitHub
+    - Есть распространение через сервис Firebase App Distribution
+
+6. **Разное**:
+    - Firebase analytics
+
+## Обратная связь
+
+https://t.me/chechetka337
 
 ## Ссылки
 
@@ -29,4 +41,5 @@
 ![4](https://downloader.disk.yandex.ru/preview/5f73dc8a3aebabe1ae5b9e62b05690ba74059362f2e1d5dddd60d608314cc5e7/648b991c/P3ReepbGdJVcT0OtClNqgnab7LafuJGD41SA5tKzvEi6FunNdYW2rl-Q8lrMyPIiPUZv65Q0aBs7BQMWngW4ww%3D%3D?uid=0&filename=4.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
 ![5](https://downloader.disk.yandex.ru/preview/74b48f693dc052efd15dbc9530091c4a4f7b3426e84a7e67c307bdfd24b93ae7/648b9958/S8LFtDL_BVVx-0LfPJ_eYqs02GFV10ofYTciqg3CdJ_ebKO8bkJPfd7urczB4cdEZJXiOGJtaP0dl4-OdtGr5A%3D%3D?uid=0&filename=5.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
 ![6](https://downloader.disk.yandex.ru/preview/fbdfa2e5a76e0754052cee42b23e45a8ecd77a704a83d4a16aed25646ff59dbc/648b99ab/PIHCRTDizrCkycxQ0ALIsqs02GFV10ofYTciqg3CdJ_K-RoK6HI-IhbvRj-VsbzuEg8ivXYjhnnHtYAx7Ol6mA%3D%3D?uid=0&filename=6.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
-
+![7](https://downloader.disk.yandex.ru/preview/94277d34dda4b32d44232bba111f8ee4282342621dd19c376e48ce92f65b4583/64b4b5bb/StG9dfTApLlWKDIZ8szENwUj2BIVxAf_j1Sn3pAeQdmQMtji4x383N1gkOPt7D5xg-RJ5siDCc3Y06eTdnsSnA%3D%3D?uid=0&filename=7.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
+![8](https://downloader.disk.yandex.ru/preview/1541e8589079f1cf02df552091ea8f89ce53f4ac30066c6714e7e261fb52cf7d/64b4b5d1/QYqSl1Y77piXs8doYus9YVx3u6QwLGUzj4ZZvu2a0xKdZX_sq5QzwumVCu2hf-zEYn781nrzC7kjBkhKf17Ipw%3D%3D?uid=0&filename=8.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)

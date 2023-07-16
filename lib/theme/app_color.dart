@@ -17,6 +17,7 @@ class AppColor {
   static const Color clGreyLight = Color(0xFFD1D1D6);
   static const Color clWhite = Color(0xFFFFFFFF);
   static const Color clRedRemoteConfig = Color(0xFF793CD8);
+  static const Color clShadow = Color(0x64000000);
 
   static const Color darkBackPrimary = Color(0xFF161618);
   static const Color darkBackSecondary = Color(0xFF252528);
