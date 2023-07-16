@@ -36,7 +36,7 @@ jobs:
       - name: Run unit tests
         run: flutter test test
       - name: Build release-apk
-        run: flutter build apk
+         run: flutter build apk
       - uses: actions/upload-artifact@v1
         with:
           name: release-apk
