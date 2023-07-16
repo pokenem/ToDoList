@@ -2,7 +2,7 @@ name: Build & upload to Firebase App Distribution
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   build:
@@ -22,13 +22,21 @@ jobs:
       - name: Decode firebase_option
         env:
           firebase_options_dart: ${{secrets.FIREBASE_OPTION}}
-        run : echo "$firebase_options_dart" > lib/firebase_options.dart
+        run: echo "$firebase_options_dart" > lib/firebase_options.dart
 
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
-      - run: flutter pub get
-      - run: flutter build apk
+      - name: Get dependencies
+        run: flutter pub get
+      - name: Check code format
+        run: dart format -o none --set-exit-if-changed .
+      - name: Static analyzer
+        run: flutter analyze --fatal-infos .
+      - name: Run unit tests
+        run: flutter test test
+      - name: Build release-apk
+        run: flutter build apk
       - uses: actions/upload-artifact@v1
         with:
           name: release-apk
