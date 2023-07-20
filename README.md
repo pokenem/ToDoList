@@ -1,4 +1,4 @@
-![image](https://github.com/pokenem/ToDoList/assets/73646157/9786586f-2768-494a-80ee-5b435a619292)# ToDoList
+# ToDoList
 
 Проект для школы мобильной разработки Яндекса
 
