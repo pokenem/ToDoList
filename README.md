@@ -1,4 +1,4 @@
-# ToDoList
+![image](https://github.com/pokenem/ToDoList/assets/73646157/9786586f-2768-494a-80ee-5b435a619292)# ToDoList
 
 Проект для школы мобильной разработки Яндекса
 
@@ -35,11 +35,11 @@ https://t.me/chechetka337
 Ссылка для скачивания apk: https://disk.yandex.ru/d/OhoHVWLQKIisQg
 
 ## Скрины из приложения
-![1](https://downloader.disk.yandex.ru/preview/cae8ab1e057b1270620afe66ce9efbda76e25c283375df7de67cbb53e38a166d/64b4b7b4/qusGiosQuCmqWv9N_SP0hk6XaktfWWdvtf_JwZhIBT4ATAYSw9MxVAvFsFTLXKBPGKlapmnA0ZcSL80grEVp8Q%3D%3D?uid=0&filename=1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
-![2](https://downloader.disk.yandex.ru/preview/a4b7d091f8aeff1dbaf393230d4dd79c883501e3d7911c8299bed428486ed957/64b4b7a3/eD6BfXqaqYuvTc2-32mOfKs02GFV10ofYTciqg3CdJ-5KAEeZ6PnEEWbOrnCxlW-s7cP9gNY1CEaXdhibduVMA%3D%3D?uid=0&filename=2.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
-![3](https://downloader.disk.yandex.ru/preview/eb0880d730d0becfb9daa1c5f7c52d8e726daada55f36aa26847f06218a3956e/64b4b78b/07vDvRdiGK_Umqb7K0OKYas02GFV10ofYTciqg3CdJ-yMHWQaKaSNVLIpNZrHaUE33jMQBcAju-9PJh_PPlWWg%3D%3D?uid=0&filename=3.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
-![4](https://downloader.disk.yandex.ru/preview/93adcd8465063c56ecc7f8bf29b8779380240311483aac5b5da712230ed4ef41/64b4b77d/P3ReepbGdJVcT0OtClNqgnab7LafuJGD41SA5tKzvEi6FunNdYW2rl-Q8lrMyPIiPUZv65Q0aBs7BQMWngW4ww%3D%3D?uid=0&filename=4.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
-![5](https://downloader.disk.yandex.ru/preview/7b1279d1d6812b3adf74d7b2e4f9fc60dcaa90a2cf9cbba410cb53a8f2423756/64b4b76f/S8LFtDL_BVVx-0LfPJ_eYqs02GFV10ofYTciqg3CdJ_ebKO8bkJPfd7urczB4cdEZJXiOGJtaP0dl4-OdtGr5A%3D%3D?uid=0&filename=5.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
-![6](https://downloader.disk.yandex.ru/preview/ebddf88049082aea1e57b9e80f037a81d179fde237887344d7cbe729a54a9dd6/64b4b721/PIHCRTDizrCkycxQ0ALIsqs02GFV10ofYTciqg3CdJ_K-RoK6HI-IhbvRj-VsbzuEg8ivXYjhnnHtYAx7Ol6mA%3D%3D?uid=0&filename=6.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
-![7](https://downloader.disk.yandex.ru/preview/94277d34dda4b32d44232bba111f8ee4282342621dd19c376e48ce92f65b4583/64b4b5bb/StG9dfTApLlWKDIZ8szENwUj2BIVxAf_j1Sn3pAeQdmQMtji4x383N1gkOPt7D5xg-RJ5siDCc3Y06eTdnsSnA%3D%3D?uid=0&filename=7.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
-![8](https://downloader.disk.yandex.ru/preview/1541e8589079f1cf02df552091ea8f89ce53f4ac30066c6714e7e261fb52cf7d/64b4b5d1/QYqSl1Y77piXs8doYus9YVx3u6QwLGUzj4ZZvu2a0xKdZX_sq5QzwumVCu2hf-zEYn781nrzC7kjBkhKf17Ipw%3D%3D?uid=0&filename=8.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048)
+![image](https://github.com/pokenem/ToDoList/assets/73646157/5bfdd5a1-2a7b-4e1f-93db-48cec9cc680b)
+![image](https://github.com/pokenem/ToDoList/assets/73646157/37bb13a4-947f-490a-803d-010cf0fbf06d)
+![image](https://github.com/pokenem/ToDoList/assets/73646157/11ad3704-fd0e-46ca-9a95-a970053e197f)
+![image](https://github.com/pokenem/ToDoList/assets/73646157/4197f534-fa49-4296-a03c-61cc9248e286)
+![image](https://github.com/pokenem/ToDoList/assets/73646157/7a675c7c-2f4e-42d6-99a5-8e94a7bf8e42)
+![image](https://github.com/pokenem/ToDoList/assets/73646157/70c73932-cc85-4a6f-a31b-05e5bcd1ba37)
+![image](https://github.com/pokenem/ToDoList/assets/73646157/72a57fe7-e12c-41cb-82d5-6e713a8e5f68)
+![image](https://github.com/pokenem/ToDoList/assets/73646157/4923fac5-021c-4d83-9fee-b8864c66ca49)
